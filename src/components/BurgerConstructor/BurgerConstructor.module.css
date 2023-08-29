@@ -1,0 +1,22 @@
+.scrollContainer{
+    display: flex;
+gap: 16px;
+max-height: 472px;
+overflow-y: scroll;
+
+
+flex-direction: column;
+align-items: center;
+
+}
+
+.container{
+padding-left: 32px;
+}
+
+.iconContainer{
+    display: flex;
+    column-gap:8px;
+    justify-content: center;
+    align-items: center;
+}
