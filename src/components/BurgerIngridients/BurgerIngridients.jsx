@@ -41,7 +41,7 @@ function BurgerIngridients() {
           <div className={styles.ingridientContainer}>
             <div className={styles.ingridientBlock}>
               <Counter count={1} size="default" extraClass="m-1" />
-              <img src={bunDefault}></img>
+              <img src={bunDefault} alt="Краторная булка N-200i"></img>
               <div className={styles.costContainer}>
                 <p className="text text_type_digits-default">20</p>
                 <CurrencyIcon type="primary" />
@@ -51,7 +51,7 @@ function BurgerIngridients() {
               </p>
             </div>
             <div className={styles.ingridientBlock}>
-              <img src={bunPurple}></img>
+              <img src={bunPurple} alt="Флюоресцентная булка R2-D3"></img>
               <div className={styles.costContainer}>
                 <p className="text text_type_digits-default">20</p>
                 <CurrencyIcon type="primary" />
@@ -66,7 +66,7 @@ function BurgerIngridients() {
           <p className="text text_type_main-medium">Соусы</p>
           <div className={styles.ingridientContainer}>
             <div className={styles.ingridientBlock}>
-              <img src={sauceSpicy}></img>
+              <img src={sauceSpicy} alt="Соус Spicy-X"></img>
               <div className={styles.costContainer}>
                 <p className="text text_type_digits-default">30</p>
                 <CurrencyIcon type="primary" />
@@ -74,7 +74,7 @@ function BurgerIngridients() {
               <p className="text text_type_main-default">Соус Spicy-X</p>
             </div>
             <div className={styles.ingridientBlock}>
-              <img src={sauceSpace}></img>
+              <img src={sauceSpace} alt='Соус фирменный Space Sauce'></img>
               <div className={styles.costContainer}>
                 <p className="text text_type_digits-default">30</p>
                 <CurrencyIcon type="primary" />
@@ -85,7 +85,7 @@ function BurgerIngridients() {
             </div>
             <div className={styles.ingridientBlock}>
               <Counter count={1} size="default" extraClass="m-1" />
-              <img src={sauceTradition}></img>
+              <img src={sauceTradition} alt='Соус традиционный галактический'></img>
               <div className={styles.costContainer}>
                 <p className="text text_type_digits-default">30</p>
                 <CurrencyIcon type="primary" />
@@ -95,7 +95,7 @@ function BurgerIngridients() {
               </p>
             </div>
             <div className={styles.ingridientBlock}>
-              <img src={sauceAlien}></img>
+              <img src={sauceAlien} alt='Соус c шипами Антарианского плоскоходца'></img>
               <div className={styles.costContainer}>
                 <p className="text text_type_digits-default">30</p>
                 <CurrencyIcon type="primary" />
@@ -110,7 +110,7 @@ function BurgerIngridients() {
           <p className="text text_type_main-medium">Начинка</p>
           <div className={styles.ingridientContainer}>
             <div className={styles.ingridientBlock}>
-              <img src={fillet}></img>
+              <img src={fillet} alt='Филе Люминесцентного тетраодонтимформа'></img>
               <div className={styles.costContainer}>
                 <p className="text text_type_digits-default">300</p>
                 <CurrencyIcon type="primary" />
@@ -120,7 +120,7 @@ function BurgerIngridients() {
               </p>
             </div>
             <div className={styles.ingridientBlock}>
-              <img src={immortalMeat}></img>
+              <img src={immortalMeat} alt='Мясо бессмертных моллюсков Protostomia'></img>
               <div className={styles.costContainer}>
                 <p className="text text_type_digits-default">300</p>
                 <CurrencyIcon type="primary" />
@@ -130,7 +130,7 @@ function BurgerIngridients() {
               </p>
             </div>
             <div className={styles.ingridientBlock}>
-              <img src={beefMeteor}></img>
+              <img src={beefMeteor} alt='Говяжий метеорит'></img>
               <div className={styles.costContainer}>
                 <p className="text text_type_digits-default">300</p>
                 <CurrencyIcon type="primary" />
@@ -138,7 +138,7 @@ function BurgerIngridients() {
               <p className="text text_type_main-default">Говяжий метеорит</p>
             </div>
             <div className={styles.ingridientBlock}>
-              <img src={marsBioCutlet}></img>
+              <img src={marsBioCutlet} alt='Биокотлета из марсианской Магнолии'></img>
               <div className={styles.costContainer}>
                 <p className="text text_type_digits-default">300</p>
                 <CurrencyIcon type="primary" />
@@ -148,7 +148,7 @@ function BurgerIngridients() {
               </p>
             </div>
             <div className={styles.ingridientBlock}>
-              <img src={falianFruits}></img>
+              <img src={falianFruits} alt='Плоды Фалленианского дерева'></img>
               <div className={styles.costContainer}>
                 <p className="text text_type_digits-default">80</p>
                 <CurrencyIcon type="primary" />
@@ -158,7 +158,7 @@ function BurgerIngridients() {
               </p>
             </div>
             <div className={styles.ingridientBlock}>
-              <img src={marsCrystalls}></img>
+              <img src={marsCrystalls} alt='Кристаллы марсианских альфа-сахаридов'></img>
               <div className={styles.costContainer}>
                 <p className="text text_type_digits-default">80</p>
                 <CurrencyIcon type="primary" />
@@ -169,7 +169,7 @@ function BurgerIngridients() {
             </div>
             <div className={styles.ingridientBlock}>
               <img src={mineralRings}></img>
-              <div className={styles.costContainer}>
+              <div className={styles.costContainer} alt='Хрустящие минеральные кольца'>
                 <p className="text text_type_digits-default">80</p>
                 <CurrencyIcon type="primary" />
               </div>
@@ -178,7 +178,7 @@ function BurgerIngridients() {
               </p>
             </div>
             <div className={styles.ingridientBlock}>
-              <img src={miniSalad}></img>
+              <img src={miniSalad} alt='Мини-салат Экзо-Плантаго'></img>
               <div className={styles.costContainer}>
                 <p className="text text_type_digits-default">80</p>
                 <CurrencyIcon type="primary" />
@@ -188,13 +188,13 @@ function BurgerIngridients() {
               </p>
             </div>
             <div className={styles.ingridientBlock}>
-              <img src={asteroidCheese}></img>
+              <img src={asteroidCheese} alt='Сыр с астероидной плесенью'></img>
               <div className={styles.costContainer}>
                 <p className="text text_type_digits-default">80</p>
                 <CurrencyIcon type="primary" />
               </div>
               <p className="text text_type_main-default">
-                Сыр с астероидной плесенью
+              Сыр с астероидной плесенью
               </p>
             </div>
           </div>
