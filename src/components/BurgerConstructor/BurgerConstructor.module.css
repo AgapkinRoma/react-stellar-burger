@@ -1,22 +1,44 @@
-.scrollContainer{
-    display: flex;
-gap: 16px;
-max-height: 472px;
-overflow-y: scroll;
+.scrollContainer {
+  display: flex;
+  gap: 16px;
+  max-height: 472px;
+  overflow-y: scroll;
 
-
-flex-direction: column;
-align-items: center;
-
+  flex-direction: column;
+  align-items: center;
 }
 
-.container{
-padding-left: 32px;
+.container {
+  padding-left: 32px;
 }
 
-.iconContainer{
-    display: flex;
-    column-gap:8px;
-    justify-content: center;
-    align-items: center;
+.iconContainer {
+  display: flex;
+  column-gap: 8px;
+  justify-content: center;
+  align-items: center;
+}
+
+.componentContainer {
+  max-width: 600px;
+  max-height: 656px;
+}
+
+.constructorContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.totalContainer {
+  display: flex;
+  align-items: center;
+  column-gap: 40px;
+  justify-content: flex-end;
+}
+
+.costContainer {
+  display: flex;
+  align-items: center;
+  column-gap: 8px;
 }

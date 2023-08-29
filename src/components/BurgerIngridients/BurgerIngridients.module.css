@@ -1,27 +1,39 @@
-
-.ingridientContainer{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    column-gap: 24px;
-   margin-left: 16px;
-   margin-top: 24px;
-    flex-wrap: wrap;
-    row-gap:32px;
-
+.ingridientContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  column-gap: 24px;
+  margin-left: 16px;
+  margin-top: 24px;
+  flex-wrap: wrap;
+  row-gap: 32px;
 }
 
-
-.ingridientBlock{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 272px;
-    position: relative;
-    row-gap: 4px;
+.ingridientBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 272px;
+  position: relative;
+  row-gap: 4px;
+  text-align: center;
 }
 
-.costContainer{
-    display: flex;
-    column-gap: 8px;
+.costContainer {
+  display: flex;
+  column-gap: 8px;
+}
+
+.tabContainer {
+  display: flex;
+}
+
+.componentContainer {
+  max-width: 600px;
+}
+
+.scrollContainer {
+  overflow-x: hidden;
+  overflow-y: scroll;
+  max-height: 700px;
 }
