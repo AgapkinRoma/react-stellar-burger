@@ -1,15 +1,15 @@
 import styles from "./app.module.css";
 import { data } from "../../utils/data";
-import AppHeader from "../AppHeader/AppHeader";
-import BurgerConstructor from "../BurgerConstructor/BurgerConstructor";
-import BurgerIngridients from "../BurgerIngridients/BurgerIngridients";
+import AppHeader from "../app-header/app-header";
+import BurgerConstructor from "../burger-constructor/burger-constructor";
+import BurgerIngridients from "../burger-ingridients/burger-ingridients";
 function App() {
   return (
   <div className={styles.app}>
-    <AppHeader></AppHeader>
-  <nav style={{display:'flex',columnGap:"40px",justifyContent:"center"}}>
-  <BurgerIngridients></BurgerIngridients>
-  <BurgerConstructor></BurgerConstructor>
+    <AppHeader/>
+  <nav className={styles.container}>
+  <BurgerIngridients/>
+  <BurgerConstructor/>
   </nav>
   </div>
   );
