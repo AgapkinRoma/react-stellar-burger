@@ -1,11 +1,11 @@
-import { data } from "../../../utils/data";
 import constructorStyles from "../burger-constructor.module.css";
 import { DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
 import bunDefault from "../../../images/bun-default.svg";
-function ConstructorItems() {
-  const topping = data.filter((item) => item.type !== "bun");
-  
+import PropTypes from "prop-types";
+function ConstructorItems(props) {
+  const topping = props.data.filter((item) => item.type !== "bun");
+
   return (
     <div className={constructorStyles.constructorContainer}>
       <div className={constructorStyles.container}>
@@ -42,4 +42,22 @@ function ConstructorItems() {
     </div>
   );
 }
+ConstructorItems.propTypes = {
+  data: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      type: PropTypes.string.isRequired,
+      proteins: PropTypes.number.isRequired,
+      fat: PropTypes.number.isRequired,
+      carbohydrates: PropTypes.number.isRequired,
+      calories: PropTypes.number.isRequired,
+      price: PropTypes.number.isRequired,
+      image: PropTypes.string.isRequired,
+      image_mobile: PropTypes.string.isRequired,
+      image_large: PropTypes.string.isRequired,
+      __v: PropTypes.number.isRequired,
+    })
+  ),
+};
 export default ConstructorItems;

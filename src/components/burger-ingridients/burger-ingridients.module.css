@@ -10,7 +10,7 @@
 }
 
 .ingridientBlock {
-  max-width: 272px;
+  max-width: 240px;
   display: flex;
   flex-direction: column;
   row-gap: 8px;
