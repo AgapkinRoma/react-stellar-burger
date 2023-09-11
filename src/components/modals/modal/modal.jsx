@@ -16,14 +16,14 @@ function Modal(props) {
     }
   };
   React.useEffect(() => {
-    const escapeCloseModal = (e) => {
+    const handleEscape = (e) => {
       if (e.key === "Escape") {
         closeModal();
       }
     };
-    window.addEventListener("keydown", escapeCloseModal);
+    window.addEventListener("keydown", handleEscape);
     return () => {
-      window.removeEventListener("keydown", escapeCloseModal);
+      window.removeEventListener("keydown", handleEscape);
     };
   }, [closeModal]);
 

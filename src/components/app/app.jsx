@@ -11,7 +11,11 @@ function App() {
 
   useEffect(() => {
     return fetch(url)
-      .then((res) => res.json())
+      .then( res => {if (res.ok){
+        return res.json();
+      }
+      return Promise.reject(`Ошибка ${res.status}`)
+    })
       .then((data) => data.data)
       .then((data) => {
         setIngredients(data);
@@ -22,11 +26,11 @@ function App() {
   return (
     <div className={styles.app}>
       <AppHeader />
-      <nav className={styles.container}>
+      <main className={styles.container}>
         <BurgerIngridients ingredients={ingredients} />
         <BurgerConstructor ingredients={ingredients} />
    
-      </nav>
+      </main>
     </div>
   );
 }
