@@ -5,3 +5,9 @@
   background-color: #131316;
   color: #f2f2f3;
 }
+
+.container {
+  display: flex;
+  justify-content: center;
+  column-gap: 40px;
+}

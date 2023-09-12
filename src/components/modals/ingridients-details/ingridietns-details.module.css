@@ -1,0 +1,16 @@
+.aboutContainer {
+  display: flex;
+  flex-direction: row;
+  column-gap: 20px;
+}
+
+.title {
+  align-self: flex-start;
+}
+
+.container {
+  width: 640px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
