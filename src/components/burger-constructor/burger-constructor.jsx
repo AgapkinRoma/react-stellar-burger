@@ -8,25 +8,19 @@ import OrderDetails from "../modals/order-details/order-details";
 import PropTypes from "prop-types";
 import { ingredientPropType } from "../../utils/prop-types";
 import { useModal } from "../../hooks/useModal";
-function BurgerConstructor({ ingredients }) {
+function BurgerConstructor() {
   const { isModalOpen, openModal, closeModal } = useModal();
-  const handleOpenModal = () => {
-    openModal();
-  };
 
-  const handleCloseModal = () => {
-    closeModal();
-  };
   return (
     <div className={`${styles.componentContainer} mt-25`}>
-      <ConstructorItems data={ingredients} />
+      <ConstructorItems />
       <div className={`${styles.totalContainer} mt-10`}>
         <div className={styles.costContainer}>
           <p className="text text_type_digits-medium">610</p>
           <CurrencyIcon />
         </div>
         <Button
-          onClick={handleOpenModal}
+          onClick={openModal}
           htmlType="button"
           type="primary"
           size="large"
@@ -35,16 +29,12 @@ function BurgerConstructor({ ingredients }) {
         </Button>
       </div>
       {isModalOpen && (
-        <Modal onClose={handleCloseModal}>
+        <Modal onClose={closeModal}>
           <OrderDetails />
         </Modal>
       )}
     </div>
   );
 }
-
-BurgerConstructor.propTypes = {
-  ingredients: PropTypes.arrayOf(ingredientPropType).isRequired,
-};
 
 export default BurgerConstructor;

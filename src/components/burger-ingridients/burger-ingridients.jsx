@@ -2,21 +2,23 @@ import styles from "./burger-ingridients.module.css";
 import PropTypes from "prop-types";
 import Tabs from "./tabs/tabs";
 import IngridientsDetails from "../modals/ingridients-details/ingridients-details.jsx";
-import React, { useState } from "react";
-import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import ingridientStyles from "./burger-ingridients.module.css";
+import React, { useState, useContext } from "react";
 import Modal from "../modals/modal/modal";
 import Ingridients from "./ingridients/ingridients";
 import { ingredientPropType } from "../../utils/prop-types";
 import { useModal } from "../../hooks/useModal";
-function BurgerIngridients({ ingredients }) {
+import { IngredientsContext } from "../../services/ingridientsContext";
+
+function BurgerIngridients() {
+  const { ingredients, setIngredients } = useContext(IngredientsContext);
   const buns = ingredients.filter((item) => item.type === "bun");
+  console.log(ingredients)
   const sauces = ingredients.filter((item) => item.type === "sauce");
   const mains = ingredients.filter((item) => item.type === "main");
-  const [ingridient, setIngridient] = useState(null);
   const { isModalOpen, openModal, closeModal } = useModal();
+
   const handleOpenModal = (item) => {
-    setIngridient(item);
+    setIngredients(item);
     openModal();
   };
 
@@ -65,15 +67,12 @@ function BurgerIngridients({ ingredients }) {
       </div>
       {isModalOpen && (
         <Modal title={"Детали ингредиента"} onClose={handleCloseModal}>
-          <IngridientsDetails data={ingridient}></IngridientsDetails>
+          <IngridientsDetails></IngridientsDetails>
         </Modal>
       )}
     </div>
   );
 }
 
-BurgerIngridients.propTypes = {
-  ingredients: PropTypes.arrayOf(ingredientPropType).isRequired,
-};
 
 export default BurgerIngridients;

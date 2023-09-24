@@ -3,10 +3,12 @@ import { DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
 import bunDefault from "../../../images/bun-default.svg";
 import PropTypes from "prop-types";
-import  {ingredientPropType}  from "../../../utils/prop-types";
-function ConstructorItems(props) {
-  const { data } = props;
-  const topping = data.filter((item) => item.type !== "bun");
+import { ingredientPropType } from "../../../utils/prop-types";
+import { IngredientsContext } from "../../../services/ingridientsContext";
+import { useContext } from "react";
+function ConstructorItems() {
+  const { ingredients } = useContext(IngredientsContext);
+  const topping = ingredients.filter((item) => item.type !== "bun");
 
   return (
     <div className={constructorStyles.constructorContainer}>
@@ -45,7 +47,5 @@ function ConstructorItems(props) {
   );
 }
 
-ConstructorItems.propTypes = {
-  data: PropTypes.arrayOf(ingredientPropType).isRequired,
-};
+
 export default ConstructorItems;
