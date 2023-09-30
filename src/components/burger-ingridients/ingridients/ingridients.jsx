@@ -6,7 +6,7 @@ import { ingredientPropType } from "../../../utils/prop-types";
 export default function Ingridients(props) {
   const { item, onClick } = props;
   return (
-    <div onClick={() => onClick(item)}   className={ingridientStyles.ingridientBlock}>
+    <div onClick={() => onClick(onClick)}   className={ingridientStyles.ingridientBlock}>
       <img src={item.image} alt={item.name}></img>
       <div className={ingridientStyles.priceContainer}>
         <p className="text text_type_digits-default">{item.price}</p>

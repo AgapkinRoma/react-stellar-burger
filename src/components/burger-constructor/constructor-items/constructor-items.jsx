@@ -1,29 +1,29 @@
 import constructorStyles from "../burger-constructor.module.css";
 import { DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
-import bunDefault from "../../../images/bun-default.svg";
-import PropTypes from "prop-types";
-import { ingredientPropType } from "../../../utils/prop-types";
-import { IngredientsContext } from "../../../services/ingridientsContext";
+import { ConstructorContext } from "../../../services/constructorContext";
 import { useContext } from "react";
+import {v4 as uuid} from 'uuid'
 function ConstructorItems() {
-  const { ingredients } = useContext(IngredientsContext);
-  const topping = ingredients.filter((item) => item.type !== "bun");
-
+ const  {constructorIngredients} = useContext(ConstructorContext)
+  const topping = constructorIngredients.ingredients.filter((item) => item.type !== "bun");
+  const bun = constructorIngredients.bun;
   return (
     <div className={constructorStyles.constructorContainer}>
       <div className={constructorStyles.container}>
+      {bun  &&
         <ConstructorElement
-          type="top"
-          isLocked={true}
-          text="Краторная булка N-200i (верх)"
-          price={200}
-          thumbnail={bunDefault}
-        />
+          type={`${'top'} ${bun.type}`}
+          isLocked
+          text={`${bun.name} ${'(Верх)'}`}
+          price={bun.price}
+          thumbnail={bun.image_mobile}
+        
+        />}
       </div>
       <div className={`${constructorStyles.scrollContainer} custom-scroll`}>
         {topping.map((item) => (
-          <div className={constructorStyles.iconContainer} key={item._id}>
+          <div className={constructorStyles.iconContainer} key={uuid()}>
             <DragIcon type="primary" />
             <ConstructorElement
               text={item.name}
@@ -35,13 +35,15 @@ function ConstructorItems() {
       </div>
 
       <div className={constructorStyles.container}>
+      {bun  &&
         <ConstructorElement
-          type="bottom"
-          isLocked={true}
-          text="Краторная булка N-200i (низ)"
-          price={200}
-          thumbnail={bunDefault}
-        />
+          type={ `${'bottom'} ${bun.type}`}
+          isLocked
+          text={`${bun.name} ${'(Низ)'}`}
+          price={bun.price}
+          thumbnail={bun.image_mobile}
+        
+        />}
       </div>
     </div>
   );

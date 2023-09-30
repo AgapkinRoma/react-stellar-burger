@@ -8,18 +8,22 @@ import Ingridients from "./ingridients/ingridients";
 import { ingredientPropType } from "../../utils/prop-types";
 import { useModal } from "../../hooks/useModal";
 import { IngredientsContext } from "../../services/ingridientsContext";
+import { ConstructorContext } from "../../services/constructorContext";
 
 function BurgerIngridients() {
   const { ingredients, setIngredients } = useContext(IngredientsContext);
+  const {constructorIngredients, setConstructorIngredients } = useContext(ConstructorContext);
+  const [selectedIngredient, setSelectedIngredient] = useState(null);
   const buns = ingredients.filter((item) => item.type === "bun");
-  console.log(ingredients)
   const sauces = ingredients.filter((item) => item.type === "sauce");
   const mains = ingredients.filter((item) => item.type === "main");
   const { isModalOpen, openModal, closeModal } = useModal();
 
   const handleOpenModal = (item) => {
-    setIngredients(item);
-    openModal();
+    setSelectedIngredient(item);
+    openModal()
+    item.type === 'bun' ? setConstructorIngredients({...constructorIngredients, bun: item}) : setConstructorIngredients({...constructorIngredients, ingredients: [...constructorIngredients.ingredients, item] })
+ 
   };
 
   const handleCloseModal = () => {
@@ -67,12 +71,11 @@ function BurgerIngridients() {
       </div>
       {isModalOpen && (
         <Modal title={"Детали ингредиента"} onClose={handleCloseModal}>
-          <IngridientsDetails></IngridientsDetails>
+          <IngridientsDetails ingredient={selectedIngredient}></IngridientsDetails>
         </Modal>
       )}
     </div>
   );
 }
-
 
 export default BurgerIngridients;

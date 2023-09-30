@@ -19,8 +19,13 @@
 }
 
 .componentContainer {
-  max-width: 600px;
-  max-height: 656px;
+  width: 600px;
+  height: 656px;
+  display: grid;
+  justify-items: end;
+  
+ 
+ 
 }
 
 .constructorContainer {
@@ -31,9 +36,9 @@
 
 .totalContainer {
   display: flex;
-  align-items: center;
   column-gap: 40px;
-  justify-content: flex-end;
+ align-self: end;
+  align-items: center;
 }
 
 .costContainer {
