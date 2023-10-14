@@ -21,7 +21,7 @@ export function constructorIngredientsReducer(state = initialState, action) {
     case SET_INGREDIENTS: {
       return {
         ...state,
-        ingredients: [...state.ingredients, { ...action.payload, key: uuid() }],
+        ingredients: [...state.ingredients, action.payload],
       };
     }
     case DELETE_INGREDIENTS: {

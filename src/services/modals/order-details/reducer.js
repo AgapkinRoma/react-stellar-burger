@@ -1,12 +1,16 @@
 import {
   CLOSE_MODAL_ORDER_DETAILS,
   OPEN_MODAL_ORDER_DETAILS,
-  SET_ORDER_NUMBER,
+  SUBMIT_ORDER_NUMBER_SUCCESS,
+  SUBMIT_ORDER_NUMBER_REQUEST,
+  SUBMIT_ORDER_NUMBER_FAILED,
 } from "./actions";
 
 const initialState = {
   ordersModal: false,
   orderNumber: null,
+  loading: false,
+  error: null,
 };
 export function orderDetailsModal(state = initialState, action) {
   switch (action.type) {
@@ -20,10 +24,26 @@ export function orderDetailsModal(state = initialState, action) {
       return initialState;
     }
 
-    case SET_ORDER_NUMBER: {
+    case SUBMIT_ORDER_NUMBER_REQUEST: {
+      return {
+        ...state,
+        loading: true,
+        error: null,
+      };
+    }
+
+    case SUBMIT_ORDER_NUMBER_SUCCESS: {
       return {
         ...state,
         orderNumber: action.payload,
+      };
+    }
+
+    case SUBMIT_ORDER_NUMBER_FAILED: {
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
       };
     }
     default:

@@ -1,13 +1,13 @@
 import { url } from "../../components/app/app";
 //actions
-export const GET_INGREDIENTS = "GET_INGREDIENTS";
+export const GET_INGREDIENTS_REQUEST = "GET_INGREDIENTS_REQUEST";
 export const GET_INGREDIENTS_FAILED = "GET_INGREDIENTS_FAILED";
 export const GET_INGREDIENTS_SUCCESS = "GET_INGREDIENTS_SUCCES";
 export const GET_SELECTED_INGREDIENTS = "GET_SELECTED_INGREDIENTS";
-export const SWITCH_TAB = 'SWITCH_TAB'
+export const SWITCH_TAB = "SWITCH_TAB";
 //action-creators
 const getIngredientsActionRequest = () => ({
-  type: GET_INGREDIENTS,
+  type: GET_INGREDIENTS_REQUEST,
 });
 export const getSelectedIngredientsActionRequest = (item) => ({
   type: GET_SELECTED_INGREDIENTS,
@@ -23,10 +23,10 @@ const getIngredientsActionError = (error) => ({
   payload: error,
 });
 
-export const switchTabAction = (tab) =>({
-  type:SWITCH_TAB,
-  payload:tab
-})
+export const switchTabAction = (tab) => ({
+  type: SWITCH_TAB,
+  payload: tab,
+});
 
 ///thunk
 

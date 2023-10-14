@@ -13,6 +13,7 @@ import { useCalculateCost } from "../../hooks/useCalculateCost";
 import { useDrop } from "react-dnd";
 import { dropIngredientsAction } from "../../services/burger-constructor/actions";
 import update from "immutability-helper";
+import { v4 as uuidv4 } from 'uuid';
 function BurgerConstructor() {
   const { orderDetailsModal, closeOrderModal } = useModal();
   const dispatch = useDispatch();
@@ -40,7 +41,8 @@ function BurgerConstructor() {
   });
 
   const handleDrop = (item) => {
-    dispatch(dropIngredientsAction(item));
+    const itemWithKey = { ...item, key: uuidv4() };
+    dispatch(dropIngredientsAction(itemWithKey));
   };
 
   return (

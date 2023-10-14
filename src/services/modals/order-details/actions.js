@@ -1,16 +1,27 @@
 export const OPEN_MODAL_ORDER_DETAILS = "OPEN_MODAL_ORDER_DETAILS";
 export const CLOSE_MODAL_ORDER_DETAILS = "CLOSE_MODAL_ORDER_DETAILS";
-export const SET_ORDER_NUMBER = " SET_ORDER_NUMBER";
+export const SUBMIT_ORDER_NUMBER_SUCCESS = "SUBMIT_ORDER_NUMBER_SUCCESS";
+export const SUBMIT_ORDER_NUMBER_REQUEST = "SUBMIT_ORDER_NUMBER_REQUEST";
+export const SUBMIT_ORDER_NUMBER_FAILED = "SUBMIT_ORDER_NUMBER_FAILED";
 
+const setOrderNumberRequest = () => ({
+  type: SUBMIT_ORDER_NUMBER_REQUEST,
+});
+
+const setOrderNumberFailed = (error) => ({
+  type: SUBMIT_ORDER_NUMBER_FAILED,
+  error,
+});
 export const setOrderNumber = (orderNumber) => {
-  return { type: SET_ORDER_NUMBER, payload: orderNumber };
+  return { type: SUBMIT_ORDER_NUMBER_SUCCESS, payload: orderNumber };
 };
 export const openOrderModal = () => {
   return { type: OPEN_MODAL_ORDER_DETAILS };
 };
 export const submitOrder = (constructorIngredients) => {
   return function (dispatch) {
-    dispatch(openOrderModal());
+    dispatch(setOrderNumberRequest);
+
     const ingredId = constructorIngredients.ingredients.map((item) => item._id);
     const bunId = constructorIngredients.bun._id;
     const ingredientsId = [bunId, ...ingredId, bunId];
@@ -21,8 +32,19 @@ export const submitOrder = (constructorIngredients) => {
         ingredients: ingredientsId,
       }),
     })
-      .then((res) => res.json())
-      .then((data) => dispatch(setOrderNumber(data.order.number)))
-      .catch((error) => console.log(`Упс ошибка - ${error}`));
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        return Promise.reject(`Ошибка ${res.status}`);
+      })
+      .then((data) => {
+        dispatch(setOrderNumber(data.order.number));
+        dispatch(openOrderModal());
+      })
+      .catch((error) => {
+        console.log(`Упс ошибка - ${error}`);
+        dispatch(setOrderNumberFailed(error));
+      });
   };
 };
