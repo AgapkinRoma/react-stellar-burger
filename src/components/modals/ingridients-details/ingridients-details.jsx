@@ -1,9 +1,6 @@
 import IngridientsAbout from "./ingridients-about";
 import styles from "./ingridietns-details.module.css";
 import PropTypes from "prop-types";
-import { ingredientPropType } from "../../../utils/prop-types";
-import { IngredientsContext } from "../../../services/ingridientsContext";
-import { useContext } from "react";
 export default function IngridientsDetails({ingredient}) {
   
   return (
@@ -22,3 +19,13 @@ export default function IngridientsDetails({ingredient}) {
     </div>
   );
 }
+IngridientsDetails.propTypes = {
+  ingredient: PropTypes.shape({
+    image_large: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    calories: PropTypes.number.isRequired,
+    proteins: PropTypes.number.isRequired,
+    fat: PropTypes.number.isRequired,
+    carbohydrates: PropTypes.number.isRequired
+  }).isRequired
+};

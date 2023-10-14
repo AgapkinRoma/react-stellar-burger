@@ -6,70 +6,80 @@ import ConstructorItems from "./constructor-items/constructor-items";
 import Modal from "../modals/modal/modal";
 import OrderDetails from "../modals/order-details/order-details";
 import { useModal } from "../../hooks/useModal";
-import { ConstructorContext } from "../../services/constructorContext";
-
+import { useCallback } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { submitOrder } from "../../services/modals/order-details/actions";
+import { useCalculateCost } from "../../hooks/useCalculateCost";
+import { useDrop } from "react-dnd";
+import { dropIngredientsAction } from "../../services/burger-constructor/actions";
+import update from "immutability-helper";
 function BurgerConstructor() {
-  const { isModalOpen, openModal, closeModal } = useModal();
-  const { costState, dispatch, constructorIngredients } =
-    useContext(ConstructorContext);
-  const bun = constructorIngredients.bun;
-  const ingredients = constructorIngredients.ingredients;
-  const [orderNumber, setOrderNumber] = useState(null);
+  const { orderDetailsModal, closeOrderModal } = useModal();
+  const dispatch = useDispatch();
+  const constructorIngredients = useSelector(
+    (state) => state.constructorIngredientsReducer
+  );
+  const costState = useSelector((state) => state.costReducer);
+  const orderNumber = useSelector(
+    (state) => state.orderDetailsModal.orderNumber
+  );
   function handleOrderDetails() {
-    const ingredId = constructorIngredients.ingredients.map((item) => item._id);
-    const bunId = constructorIngredients.bun._id;
-    const ingredientsId = [bunId, ...ingredId, bunId];
-
-    fetch("https://norma.nomoreparties.space/api/orders", {
-      method: "POST",
-      headers: { "Content-type": "application/json" },
-      body: JSON.stringify({
-        ingredients: ingredientsId,
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setOrderNumber(data.order.number);
-      })
-      .catch((error) => {
-        console.log(`Упс ошибка - ${error}`);
-      });
-    openModal();
+    dispatch(submitOrder(constructorIngredients));
   }
+  ///счетчик стоимости
+  useCalculateCost(constructorIngredients);
+  ///
+  const [{ isOver }, dropTarget] = useDrop({
+    accept: "ingredients",
+    drop(itemId) {
+      handleDrop(itemId);
+    },
+    collect: (monitor) => ({
+      isOver: monitor.isOver({ shallow: true }),
+    }),
+  });
 
-  useEffect(() => {
-    if (bun) {
-      dispatch({ type: "add", payload: bun.price * 2 });
-    }
-    if (ingredients) {
-      dispatch({
-        type: "add",
-        payload: ingredients.reduce((cost, item) => cost + item.price, 0),
-      });
-    }
-  }, [constructorIngredients]);
+  const handleDrop = (item) => {
+    dispatch(dropIngredientsAction(item));
+  };
 
   return (
-    <div className={`${styles.componentContainer} mt-25`}>
-      <ConstructorItems />
-      <div className={`${styles.totalContainer} mt-10`}>
-        <div className={styles.costContainer}>
-          <p className="text text_type_digits-medium">{costState}</p>
-          <CurrencyIcon />
-        </div>
-        <Button
-          onClick={handleOrderDetails}
-          htmlType="button"
-          type="primary"
-          size="large"
+    <div ref={dropTarget} className={`mt-25 ${styles.componentContainer}`}>
+      {constructorIngredients.bun !== null ||
+      constructorIngredients.ingredients.length !== 0 ? (
+        <>
+          <ConstructorItems constructorIngredients={constructorIngredients} />
+          <div className={`mt-10 ${styles.totalContainer}`}>
+            <div className={styles.costContainer}>
+              <p className="text text_type_digits-medium">
+                {isNaN(costState) ? 0 : costState}
+              </p>
+              <CurrencyIcon />
+            </div>
+            <Button
+              onClick={handleOrderDetails}
+              htmlType="button"
+              type="primary"
+              size="large"
+            >
+              Оформить заказ
+            </Button>
+          </div>
+
+          {orderDetailsModal && (
+            <Modal onClose={closeOrderModal}>
+              <OrderDetails orderNumber={orderNumber} />
+            </Modal>
+          )}
+        </>
+      ) : (
+        <div
+          className={`${styles.plugContainer} ${
+            isOver ? styles.plugContainerHighlighted : ""
+          } `}
         >
-          Оформить заказ
-        </Button>
-      </div>
-      {isModalOpen && (
-        <Modal onClose={closeModal}>
-          <OrderDetails orderNumber={orderNumber} />
-        </Modal>
+          Выберите ингредиенты для вашего бургера 😊
+        </div>
       )}
     </div>
   );
