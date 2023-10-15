@@ -1,22 +1,31 @@
 import IngridientsAbout from "./ingridients-about";
 import styles from "./ingridietns-details.module.css";
 import PropTypes from "prop-types";
-import { ingredientPropType } from "../../../utils/prop-types";
-export default function IngridientsDetails({ data }) {
+export default function IngridientsDetails({ingredient}) {
+  
   return (
     <div className={styles.container}>
-      <img src={data.image_large} alt={data.name}></img>
-      <p className="text text_type_main-medium mt-4">{data.name}</p>
+      <img src={ingredient.image_large} alt={ingredient.name}></img>
+      <p className="text text_type_main-medium mt-4">{ingredient.name}</p>
       <div className={styles.aboutContainer}>
-        <IngridientsAbout text="Калории,ккал" quantity={data.calories} />
-        <IngridientsAbout text="Белки, г" quantity={data.proteins} />
-        <IngridientsAbout text="Жиры, г" quantity={data.fat} />
-        <IngridientsAbout text="Углеводы, г" quantity={data.carbohydrates} />
+        <IngridientsAbout text="Калории,ккал" quantity={ingredient.calories} />
+        <IngridientsAbout text="Белки, г" quantity={ingredient.proteins} />
+        <IngridientsAbout text="Жиры, г" quantity={ingredient.fat} />
+        <IngridientsAbout
+          text="Углеводы, г"
+          quantity={ingredient.carbohydrates}
+        />
       </div>
     </div>
   );
 }
 IngridientsDetails.propTypes = {
-  data: ingredientPropType.isRequired
-
+  ingredient: PropTypes.shape({
+    image_large: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    calories: PropTypes.number.isRequired,
+    proteins: PropTypes.number.isRequired,
+    fat: PropTypes.number.isRequired,
+    carbohydrates: PropTypes.number.isRequired
+  }).isRequired
 };

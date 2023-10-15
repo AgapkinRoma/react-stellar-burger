@@ -12,8 +12,6 @@ export default function IngridientsAbout({ text, quantity }) {
 }
 
 IngridientsAbout.propTypes = {
-
-    text: PropTypes.string.isRequired,
-    quantity: PropTypes.number.isRequired
-
-}
+  text: PropTypes.string.isRequired,
+  quantity: PropTypes.number.isRequired,
+};

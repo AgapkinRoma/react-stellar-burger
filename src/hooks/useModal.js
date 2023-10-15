@@ -1,21 +1,45 @@
 import { useState, useCallback } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  CLOSE_MODAL_ORDER_DETAILS,
+  OPEN_MODAL_ORDER_DETAILS,
+} from "../services/modals/order-details/actions";
+import {
+  CLOSE_MODAL_INGREDIENTS_DETAILS,
+  OPEN_MODAL_INGREDIENTS_DETAILS,
+} from "../services/modals/ingredients-details/action";
 
-// кастомные хуки всегда должны начинаться с глагола `use`, чтобы реакт понял, что это хук. Он следит за их вызовами
 export const useModal = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  // `useCallback` нужен для того, чтобы зафиксировать ссылку на функцию. Таким образом уменьшится кол-во перерисовок компонента, куда будет передана эта функция
-  const openModal = useCallback(() => {
-    setIsModalOpen(true);
+  const dispatch = useDispatch();
+  const orderDetailsModal = useSelector(
+    (state) => state.orderDetailsModal.ordersModal
+  );
+  const openOrderModal = useCallback(() => {
+    dispatch({ type: OPEN_MODAL_ORDER_DETAILS });
   }, []);
 
-  const closeModal = useCallback(() => {
-    setIsModalOpen(false);
+  const closeOrderModal = useCallback(() => {
+    dispatch({ type: CLOSE_MODAL_ORDER_DETAILS });
+  }, []);
+
+  const ingredientsDetailsModal = useSelector(
+    (state) => state.ingredientsDetailsModal.ingredientsModal
+  );
+
+  const openIngredientsModal = useCallback(() => {
+    dispatch({ type: OPEN_MODAL_INGREDIENTS_DETAILS });
+  }, []);
+
+  const closeIngredientsModal = useCallback(() => {
+    dispatch({ type: CLOSE_MODAL_INGREDIENTS_DETAILS });
   }, []);
 
   return {
-    isModalOpen,
-    openModal,
-    closeModal,
+    orderDetailsModal,
+    openOrderModal,
+    closeOrderModal,
+    ingredientsDetailsModal,
+    openIngredientsModal,
+    closeIngredientsModal,
   };
 };

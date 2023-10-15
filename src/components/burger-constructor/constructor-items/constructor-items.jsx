@@ -1,51 +1,71 @@
 import constructorStyles from "../burger-constructor.module.css";
-import { DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
-import bunDefault from "../../../images/bun-default.svg";
+import { useDispatch } from "react-redux";
+import { dragIngredientsAction } from "../../../services/burger-constructor/actions";
+import { useCallback } from "react";
+import update from "immutability-helper";
+import ConstructorTopping from "../constructor-topping/constructor-topping";
 import PropTypes from "prop-types";
-import  {ingredientPropType}  from "../../../utils/prop-types";
-function ConstructorItems(props) {
-  const { data } = props;
-  const topping = data.filter((item) => item.type !== "bun");
+function ConstructorItems({ constructorIngredients }) {
+  const topping = constructorIngredients.ingredients.filter(
+    (item) => item.type !== "bun"
+  );
+  const bun = constructorIngredients.bun;
+  const dispatch = useDispatch();
+  //перенос ингредиента(сортировка)
+  const moveIngredient = useCallback((dragIndex, hoverIndex, ingredients) => {
+    const newProduct = update(ingredients, {
+      $splice: [
+        [dragIndex, 1],
+        [hoverIndex, 0, ingredients[dragIndex]],
+      ],
+    });
+    dispatch(dragIngredientsAction(newProduct));
+  }, []);
+  //
 
   return (
     <div className={constructorStyles.constructorContainer}>
       <div className={constructorStyles.container}>
-        <ConstructorElement
-          type="top"
-          isLocked={true}
-          text="Краторная булка N-200i (верх)"
-          price={200}
-          thumbnail={bunDefault}
-        />
+        {bun && (
+          <ConstructorElement
+            type={`${"top"} ${bun.type}`}
+            isLocked
+            text={`${bun.name} ${"(Верх)"}`}
+            price={bun.price}
+            thumbnail={bun.image_mobile}
+          />
+        )}
       </div>
       <div className={`${constructorStyles.scrollContainer} custom-scroll`}>
-        {topping.map((item) => (
-          <div className={constructorStyles.iconContainer} key={item._id}>
-            <DragIcon type="primary" />
-            <ConstructorElement
-              text={item.name}
-              price={item.price}
-              thumbnail={item.image}
-            />
-          </div>
+        {topping.map((item, index) => (
+          <ConstructorTopping
+            id={item._id}
+            index={index}
+            item={item}
+            moveIngredient={moveIngredient}
+            key={item.key}
+            ingredients={constructorIngredients}
+          />
         ))}
       </div>
-
       <div className={constructorStyles.container}>
-        <ConstructorElement
-          type="bottom"
-          isLocked={true}
-          text="Краторная булка N-200i (низ)"
-          price={200}
-          thumbnail={bunDefault}
-        />
+        {bun && (
+          <ConstructorElement
+            type={`${"bottom"} ${bun.type}`}
+            isLocked
+            text={`${bun.name} ${"(Низ)"}`}
+            price={bun.price}
+            thumbnail={bun.image_mobile}
+          />
+        )}
       </div>
     </div>
   );
 }
 
-ConstructorItems.propTypes = {
-  data: PropTypes.arrayOf(ingredientPropType).isRequired,
-};
 export default ConstructorItems;
+
+ConstructorItems.propTypes = {
+  constructorIngredients: PropTypes.object.isRequired,
+};
