@@ -1,8 +1,16 @@
 import IngridientsAbout from "./ingridients-about";
 import styles from "./ingridietns-details.module.css";
 import PropTypes from "prop-types";
-export default function IngridientsDetails({ingredient}) {
-  
+import { useParams } from "react-router";
+import { useSelector } from "react-redux";
+export default function IngridientsDetails() {
+  const { id } = useParams();
+  const ingredient = useSelector((state) =>
+    state.ingredientsReducer.ingredients.find((item) => item._id === id)
+  );
+  if (!ingredient) {
+    return "Загрузка";
+  }
   return (
     <div className={styles.container}>
       <img src={ingredient.image_large} alt={ingredient.name}></img>
@@ -26,6 +34,6 @@ IngridientsDetails.propTypes = {
     calories: PropTypes.number.isRequired,
     proteins: PropTypes.number.isRequired,
     fat: PropTypes.number.isRequired,
-    carbohydrates: PropTypes.number.isRequired
-  }).isRequired
+    carbohydrates: PropTypes.number.isRequired,
+  }).isRequired,
 };

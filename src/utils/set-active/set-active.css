@@ -1,0 +1,10 @@
+.link {
+  text-decoration: none;
+  color: #8585ad;
+  margin: 0;
+  font-family: "Jet Brains Mono";
+}
+
+.link_active {
+  color: #fff;
+}

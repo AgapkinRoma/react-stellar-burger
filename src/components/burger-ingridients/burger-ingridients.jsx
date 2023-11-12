@@ -195,13 +195,7 @@ function BurgerIngridients() {
             ))}
         </div>
       </div>
-      {ingredientsDetailsModal && (
-        <Modal title={"Детали ингредиента"} onClose={closeIngredientsModal}>
-          <IngridientsDetails
-            ingredient={selectedIngredient}
-          ></IngridientsDetails>
-        </Modal>
-      )}
+      
     </div>
   );
 }

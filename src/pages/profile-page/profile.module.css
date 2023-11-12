@@ -1,0 +1,51 @@
+.component {
+  display: flex;
+  justify-content: center;
+}
+.container {
+  display: flex;
+  flex-direction: row;
+  column-gap: 60px;
+  margin-top: 120px;
+  width: 1200px;
+}
+
+.navigation {
+  display: flex;
+  flex-direction: column;
+  width: 320px;
+  flex-shrink: 0;
+}
+
+.linkName {
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 30px;
+  display: flex;
+  align-items: center;
+  height: 64px;
+}
+.tip {
+  color: #8585ad;
+  font-family: "Jet Brains Mono";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  opacity: 0.4;
+  margin: 0;
+  margin-top: 80px;
+  padding: 0;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  row-gap: 24px;
+}
+.buttonContainer {
+  display: flex;
+  align-self: flex-end;
+  gap: 20px;
+}
