@@ -1,18 +1,24 @@
 import IngridientsAbout from "./ingridients-about";
 import styles from "./ingridietns-details.module.css";
-import PropTypes from "prop-types";
-import { useParams } from "react-router";
+import { useLocation, useParams } from "react-router";
 import { useSelector } from "react-redux";
 export default function IngridientsDetails() {
   const { id } = useParams();
+  const location = useLocation();
+  const pathName = location.pathname;
+
   const ingredient = useSelector((state) =>
     state.ingredientsReducer.ingredients.find((item) => item._id === id)
   );
+  console.log(ingredient);
   if (!ingredient) {
+    console.log(ingredient);
     return "Загрузка";
   }
+
   return (
     <div className={styles.container}>
+      <h2 className="text text_type_main-large">Детали ингредиента</h2>
       <img src={ingredient.image_large} alt={ingredient.name}></img>
       <p className="text text_type_main-medium mt-4">{ingredient.name}</p>
       <div className={styles.aboutContainer}>
@@ -27,13 +33,3 @@ export default function IngridientsDetails() {
     </div>
   );
 }
-IngridientsDetails.propTypes = {
-  ingredient: PropTypes.shape({
-    image_large: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    calories: PropTypes.number.isRequired,
-    proteins: PropTypes.number.isRequired,
-    fat: PropTypes.number.isRequired,
-    carbohydrates: PropTypes.number.isRequired,
-  }).isRequired,
-};

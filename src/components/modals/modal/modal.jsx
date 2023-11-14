@@ -5,6 +5,7 @@ import styles from "./modal.module.css";
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import ModalOverylay from "../modal-overlay/modal-overlay";
 const modalRootElement = document.getElementById("modal");
+
 function Modal(props) {
   const closeModal = useCallback(() => {
     props.onClose(false);

@@ -12,11 +12,13 @@ import { OnlyUnAuth } from "../protected-route/protected-route";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { checkUserAuth } from "../../services/pages/user/action";
-import OrdersPage from "../../pages/profile-page/orders-page";
+import OrdersPage from "../../pages/orders-page/orders-page";
 import ProfileData from "../../pages/profile-page/profile-data";
 import IngridientsDetails from "../modals/ingridients-details/ingridients-details";
 import Modal from "../modals/modal/modal";
 import { useLocation } from "react-router-dom";
+import { getIngredients } from "../../services/burger-ingredients/actions";
+import OrdersHistory from "../../pages/profile-page/orders-history";
 export const url = "https://norma.nomoreparties.space/api/ingredients";
 
 function App() {
@@ -30,6 +32,10 @@ function App() {
   };
   useEffect(() => {
     dispatch(checkUserAuth());
+  }, []);
+
+  useEffect(() => {
+    dispatch(getIngredients());
   }, []);
 
   return (
@@ -61,17 +67,23 @@ function App() {
           element={<OnlyAuth component={<ProfilePage />} />}
         >
           <Route index element={<ProfileData />} />
-          <Route path="orders" element={<OrdersPage />} />
+          <Route path="orders" element={<OrdersHistory />} />
 
           <Route />
         </Route>
+
+        <Route
+          path="/orders-list"
+          element={<OnlyAuth component={<OrdersPage />} />}
+        />
       </Routes>
+
       {background && (
         <Routes>
           <Route
             path="/ingredients/:id"
             element={
-              <Modal title={"Детали ингредиента"} onClose={handleModalClose}>
+              <Modal onClose={handleModalClose}>
                 <IngridientsDetails />
               </Modal>
             }

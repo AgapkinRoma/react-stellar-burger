@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import formStyles from "../form.module.css";
 import {
   Input,
@@ -20,17 +20,29 @@ export default function ResetPasswordPage() {
       .then(() => navigate("/login"))
       .catch((error) => console.log(error));
   };
-
+  if (!localStorage.getItem("forgotPassword")) {
+    return <Navigate to="/" />;
+  }
   return (
     <form className={formStyles.form}>
       <h2 className="text text_type_main-medium">Восстановление пароля</h2>
-      <Input ref={passwordRef}
+      <Input
+        ref={passwordRef}
         icon={"ShowIcon"}
         type="password"
         placeholder="Введите новый пароль"
       />
-      <Input ref={tokenRef} type="password" placeholder="Введите код из письма" />
-      <Button onClick={handleResetPassword} htmlType="button" type="primary" size="medium">
+      <Input
+        ref={tokenRef}
+        type="password"
+        placeholder="Введите код из письма"
+      />
+      <Button
+        onClick={handleResetPassword}
+        htmlType="button"
+        type="primary"
+        size="medium"
+      >
         Восстановить
       </Button>
       <div className={formStyles.instructionContainer}>

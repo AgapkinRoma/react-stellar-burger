@@ -20,18 +20,19 @@ const forgotPasswordSuccess = (email) => ({
 
 export const submitForgotPassword = (email) => {
   return function (dispatch) {
-    dispatch(forgotPasswordRequest);
+    dispatch(forgotPasswordRequest());
     return fetch("https://norma.nomoreparties.space/api/password-reset", {
       method: "POST",
-      header: { "Content-type": "application/json" },
+      headers: { "Content-type": "application/json" },
       body: JSON.stringify({
-        email:email,
+        email: email,
       }),
     })
       .then(onResponse)
       .then((data) => {
+        localStorage.setItem("forgotPassword",true);
         dispatch(forgotPasswordSuccess(data.email));
-        console.log(data.email)
+        console.log(data.email);
       })
       .catch((error) => {
         console.log(`Упс ошибка - ${error}`);

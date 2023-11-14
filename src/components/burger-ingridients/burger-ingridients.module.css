@@ -18,6 +18,7 @@
   align-items: center;
   justify-content: center;
   position: relative;
+  text-decoration: none;
 }
 
 .priceContainer {
@@ -37,4 +38,9 @@
   overflow-x: hidden;
   overflow-y: scroll;
   max-height: 700px;
+}
+
+.link {
+  text-decoration: none;
+  color: #F2F2F3;
 }

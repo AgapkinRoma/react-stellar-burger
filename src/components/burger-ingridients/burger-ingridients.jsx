@@ -54,10 +54,7 @@ function BurgerIngridients() {
     openIngredientsModal();
   };
 
-  useEffect(() => {
-    dispatch(getIngredients());
-  }, []);
-
+ 
   function handleScroll() {
     const tabsBottom = tabsRef?.current.getBoundingClientRect().bottom;
     const bunsTop = bunsRef?.current.getBoundingClientRect().top;
@@ -158,12 +155,7 @@ function BurgerIngridients() {
         </p>
         <div className={styles.ingridientContainer}>
           {buns.map((item) => (
-            <Ingridients
-              key={item._id}
-              onClick={() => handleOpenModal(item)}
-              item={item}
-              count={setCounter(item)}
-            />
+            <Ingridients key={item._id} item={item} count={setCounter(item)} />
           ))}
         </div>
         <p ref={saucesRef} className="text text_type_main-medium mt-10">
@@ -174,7 +166,6 @@ function BurgerIngridients() {
             sauces.map((item) => (
               <Ingridients
                 key={item._id}
-                onClick={() => handleOpenModal(item)}
                 item={item}
                 count={setCounter(item)}
               />
@@ -188,14 +179,12 @@ function BurgerIngridients() {
             mains.map((item) => (
               <Ingridients
                 key={item._id}
-                onClick={() => handleOpenModal(item)}
                 item={item}
                 count={setCounter(item)}
               />
             ))}
         </div>
       </div>
-      
     </div>
   );
 }

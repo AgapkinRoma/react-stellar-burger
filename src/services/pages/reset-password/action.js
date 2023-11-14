@@ -20,14 +20,17 @@ export const resetPasswordActionFailed = (error) => ({
 
 export const submitResetPassword = (password, token) => {
   return function (dispatch) {
-    dispatch(resetPasswordActionRequest);
+    dispatch(resetPasswordActionRequest());
     return fetch("https://norma.nomoreparties.space/api/password-reset/reset", {
       method: "POST",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({ password, token }),
     })
       .then(onResponse)
-      .then((data) => dispatch(resetPasswordActionSuccess(data.data)))
+      .then((data) => {
+        dispatch(resetPasswordActionSuccess(data.data));
+        localStorage.removeItem("forgotPassword");
+      })
       .catch((error) => {
         console.log(`Ошибка  - ${error}`);
         dispatch(resetPasswordActionFailed(error));
