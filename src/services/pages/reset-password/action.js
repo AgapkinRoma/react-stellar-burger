@@ -1,5 +1,5 @@
-import { onResponse } from "../../../utils/on-response";
-
+import { baseUrl } from "../../../components/app/app";
+import { request } from "../../../utils/request";
 export const RESET_PASSWORD_REQUEST = "RESET_PASSWORD_REQUEST";
 export const RESET_PASSWORD_SUCCESS = "RESET_PASSWORD_SUCCESS";
 export const RESET_PASSWORD_FAILED = "RESET_PASSWORD_FAILED";
@@ -21,12 +21,11 @@ export const resetPasswordActionFailed = (error) => ({
 export const submitResetPassword = (password, token) => {
   return function (dispatch) {
     dispatch(resetPasswordActionRequest());
-    return fetch("https://norma.nomoreparties.space/api/password-reset/reset", {
+    return request(`${baseUrl}/api/password-reset/reset`, {
       method: "POST",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({ password, token }),
     })
-      .then(onResponse)
       .then((data) => {
         dispatch(resetPasswordActionSuccess(data.data));
         localStorage.removeItem("forgotPassword");

@@ -1,5 +1,7 @@
 import { onResponse } from "../../../utils/on-response";
 import { fetchWithRefresh } from "../../../utils/refresh-token";
+import { baseUrl } from "../../../components/app/app";
+import { request } from "../../../utils/request";
 export const SET_USER = "SET_USER";
 export const SET_AUTH = "SET_AUTH";
 
@@ -15,12 +17,11 @@ const setAuth = (value) => ({
 
 export const submitRegistration = (email, password, name) => {
   return function (dispatch) {
-    return fetch("https://norma.nomoreparties.space/api/auth/register", {
+    return request(`${baseUrl}/api/auth/register`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password, name }),
     })
-      .then(onResponse)
       .then((data) => {
         localStorage.setItem("accessToken", data.accessToken);
         localStorage.setItem("refreshToken", data.refreshToken);
@@ -35,12 +36,11 @@ export const submitRegistration = (email, password, name) => {
 
 export const submitLogin = (email, password) => {
   return function (dispatch) {
-    return fetch("https://norma.nomoreparties.space/api/auth/login", {
+    return request(`${baseUrl}/api/auth/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),
     })
-      .then(onResponse)
       .then((data) => {
         localStorage.setItem("accessToken", data.accessToken);
         localStorage.setItem("refreshToken", data.refreshToken);
@@ -55,14 +55,13 @@ export const submitLogin = (email, password) => {
 
 export const submitLogoutt = () => {
   return function (dispatch) {
-    return fetch("https://norma.nomoreparties.space/api/auth/logout", {
+    return request(`${baseUrl}/api/auth/logout`, {
       method: "POST",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({
         token: localStorage.getItem("refreshToken"),
       }),
     })
-      .then(onResponse)
       .then(() => {
         localStorage.removeItem("refreshToken");
         localStorage.removeItem("accessToken");
@@ -78,16 +77,13 @@ export const submitLogoutt = () => {
 export const getUser = () => {
   return async function (dispatch) {
     try {
-      const data = await fetchWithRefresh(
-        "https://norma.nomoreparties.space/api/auth/user",
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            authorization: localStorage.getItem("accessToken"),
-          },
-        }
-      );
+      const data = await fetchWithRefresh(`${baseUrl}/api/auth/user`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          authorization: localStorage.getItem("accessToken"),
+        },
+      });
 
       dispatch(setUser(data.user));
       console.log(data.user);
@@ -100,17 +96,14 @@ export const getUser = () => {
 export const changeUserInfo = (name, email) => {
   return async function (dispatch) {
     try {
-      const data = await fetchWithRefresh(
-        "https://norma.nomoreparties.space/api/auth/user",
-        {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-            authorization: localStorage.getItem("accessToken"),
-          },
-          body: JSON.stringify({ name, email }),
-        }
-      );
+      const data = await fetchWithRefresh(`${baseUrl}/api/auth/user`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          authorization: localStorage.getItem("accessToken"),
+        },
+        body: JSON.stringify({ name, email }),
+      });
 
       dispatch(setUser(data.user));
       console.log(data.user);

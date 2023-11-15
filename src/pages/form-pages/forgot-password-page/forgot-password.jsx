@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import formStyles from "../form.module.css";
 import {
@@ -9,25 +9,26 @@ import { useDispatch } from "react-redux";
 import { submitForgotPassword } from "../../../services/pages/forgot-password/action";
 
 export default function ForgotPasswordPage() {
-  const inputRef = useRef(null);
+  const [email, setEmail] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const handleForgotPassword = () => {
-    const input = inputRef.current.value;
-    dispatch(submitForgotPassword(input))
+  const handleForgotPassword = (e) => {
+    e.preventDefault();
+
+    dispatch(submitForgotPassword(email))
       .then(() => navigate("/reset-password"))
       .catch((error) => console.log(`Ошибка регистрации: ${error}`));
   };
   return (
-    <form className={formStyles.form}>
+    <form onSubmit={handleForgotPassword} className={formStyles.form}>
       <h2 className="text text_type_main-medium">Восстановление пароля</h2>
-      <Input ref={inputRef} type="email" placeholder="Укажите E-mail" />
-      <Button
-        onClick={handleForgotPassword}
-        htmlType="button"
-        type="primary"
-        size="medium"
-      >
+      <Input
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        type="email"
+        placeholder="Укажите E-mail"
+      />
+      <Button htmlType="submit" type="primary" size="medium">
         Восстановить
       </Button>
       <div className={formStyles.instructionContainer}>

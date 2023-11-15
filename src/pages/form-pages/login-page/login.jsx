@@ -1,41 +1,38 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import formStyles from "../form.module.css";
 import {
   Input,
   Button,
+  PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useDispatch } from "react-redux";
 import { submitLogin } from "../../../services/pages/user/action";
 export default function LoginPage() {
-  const emailRef = useRef(null);
-  const passwordRef = useRef(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const submitLoginHandler = () => {
-    const login = emailRef.current.value;
-    const password = passwordRef.current.value;
-
+  const [login, setLogin] = useState("");
+  const [password, setPassword] = useState("");
+  const submitLoginHandler = (e) => {
+    e.preventDefault();
     dispatch(submitLogin(login, password))
       .then(() => navigate("/"))
       .catch((error) => console.log(`Ошибка при входе - ${error}`));
   };
   return (
-    <form className={formStyles.form}>
+    <form onSubmit={submitLoginHandler} className={formStyles.form}>
       <h2 className="text text_type_main-medium">Вход</h2>
-      <Input ref={emailRef} type="email" placeholder="E-mail" />
       <Input
-        ref={passwordRef}
-        type="password"
-        placeholder="Пароль"
-        icon={"ShowIcon"}
+        value={login}
+        onChange={(e) => setLogin(e.target.value)}
+        type="email"
+        placeholder="E-mail"
       />
-      <Button
-        onClick={submitLoginHandler}
-        htmlType="button"
-        type="primary"
-        size="medium"
-      >
+      <PasswordInput
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
+      <Button htmlType="submit" type="primary" size="medium">
         Войти
       </Button>
       <div className={formStyles.instructionContainer}>

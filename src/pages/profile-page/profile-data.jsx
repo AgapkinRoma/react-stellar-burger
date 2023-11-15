@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRef } from "react";
 import { changeUserInfo } from "../../services/pages/user/action";
@@ -12,38 +12,38 @@ import {
 export default function ProfileData() {
   const dispatch = useDispatch();
   const userInfo = useSelector((state) => state.userLogicReducer.user);
-  const nameRef = useRef(null);
-  const emailRef = useRef(null);
-
-  const handleChangeInfo = () => {
-    const name = nameRef.current.value;
-    const email = emailRef.current.value;
+  const [name, setName] = useState(userInfo.name);
+  const [email, setEmail] = useState(userInfo.email);
+  const handleChangeInfo = (e) => {
+    e.preventDefault();
     dispatch(changeUserInfo(name, email));
   };
   return (
-    <form className={styles.form}>
+    <form onSubmit={handleChangeInfo} className={styles.form}>
       {userInfo && (
         <>
           <Input
-            ref={nameRef}
-            defaultValue={userInfo.name}
+            value={name}
+            onChange={(e) => setName(e.target.value)}
             placeholder="Имя"
             type="text"
             icon={"EditIcon"}
           />
           <Input
-            ref={emailRef}
-            defaultValue={userInfo.email}
+            onChange={(e) => setEmail(e.target.value)}
+            value={email}
             placeholder="Логин"
             type="email"
             icon={"EditIcon"}
           />
-          <PasswordInput />
+          <PasswordInput readOnly value={"********"} />
         </>
       )}
       <div className={styles.buttonContainer}>
-        <Button type="secondary">Отмена</Button>
-        <Button onClick={handleChangeInfo}>Сохранить</Button>
+        <Button htmlType="reset" type="secondary">
+          Отмена
+        </Button>
+        <Button htmlType="submit">Сохранить</Button>
       </div>
     </form>
   );

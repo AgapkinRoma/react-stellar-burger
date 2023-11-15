@@ -1,13 +1,14 @@
 import { onResponse } from "./on-response";
-
+import { baseUrl } from "../components/app/app";
+import { request } from "./request";
 export const refreshToken = () => {
-  return fetch("https://norma.nomoreparties.space/api/auth/token ", {
+  return request(`${baseUrl}/api/auth/token`, {
     method: "POST",
     headers: { "Content-type": "application/json" },
     body: JSON.stringify({
       token: localStorage.getItem("refreshToken"),
     }),
-  }).then(onResponse);
+  });
 };
 
 export const fetchWithRefresh = async (url, options) => {

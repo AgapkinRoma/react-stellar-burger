@@ -1,21 +1,20 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import formStyles from "../form.module.css";
 import {
   Input,
   Button,
+  PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useDispatch } from "react-redux";
 import { submitResetPassword } from "../../../services/pages/reset-password/action";
 export default function ResetPasswordPage() {
-  const passwordRef = useRef(null);
-  const tokenRef = useRef(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const handleResetPassword = () => {
-    const password = passwordRef.current.value;
-    const token = tokenRef.current.value;
-
+  const [password, setPassword] = useState("");
+  const [token, setToken] = useState("");
+  const handleResetPassword = (e) => {
+    e.preventDefault();
     dispatch(submitResetPassword(password, token))
       .then(() => navigate("/login"))
       .catch((error) => console.log(error));
@@ -24,25 +23,19 @@ export default function ResetPasswordPage() {
     return <Navigate to="/" />;
   }
   return (
-    <form className={formStyles.form}>
+    <form onSubmit={handleResetPassword} className={formStyles.form}>
       <h2 className="text text_type_main-medium">Восстановление пароля</h2>
-      <Input
-        ref={passwordRef}
-        icon={"ShowIcon"}
-        type="password"
+      <PasswordInput
+        onChange={(e) => setPassword(e.target.value)}
+        value={password}
         placeholder="Введите новый пароль"
       />
-      <Input
-        ref={tokenRef}
-        type="password"
+      <PasswordInput
+        onChange={(e) => setToken(e.target.value)}
+        value={token}
         placeholder="Введите код из письма"
       />
-      <Button
-        onClick={handleResetPassword}
-        htmlType="button"
-        type="primary"
-        size="medium"
-      >
+      <Button htmlType="submit" type="primary" size="medium">
         Восстановить
       </Button>
       <div className={formStyles.instructionContainer}>

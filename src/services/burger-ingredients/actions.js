@@ -1,4 +1,5 @@
 import { url } from "../../components/app/app";
+import { onResponse } from "../../utils/on-response";
 //actions
 export const GET_INGREDIENTS_REQUEST = "GET_INGREDIENTS_REQUEST";
 export const GET_INGREDIENTS_FAILED = "GET_INGREDIENTS_FAILED";
@@ -33,12 +34,7 @@ export const switchTabAction = (tab) => ({
 export const getIngredients = () => (dispatch) => {
   dispatch(getIngredientsActionRequest());
   return fetch(url)
-    .then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      throw new Error(`УПС ОШИБКА - ${res.status}`);
-    })
+    .then(onResponse)
     .then((data) => data.data)
     .then((data) => {
       dispatch(getIngredientsActionSuccess(data));

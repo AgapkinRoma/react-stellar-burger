@@ -20,6 +20,7 @@ import { useLocation } from "react-router-dom";
 import { getIngredients } from "../../services/burger-ingredients/actions";
 import OrdersHistory from "../../pages/profile-page/orders-history";
 export const url = "https://norma.nomoreparties.space/api/ingredients";
+export const baseUrl = "https://norma.nomoreparties.space";
 
 function App() {
   const dispatch = useDispatch();
