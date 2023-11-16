@@ -3,15 +3,15 @@ import {
   GET_INGREDIENTS_FAILED,
   GET_INGREDIENTS_SUCCESS,
   GET_SELECTED_INGREDIENTS,
-  SWITCH_TAB
+  SWITCH_TAB,
 } from "./actions";
 
 const initialState = {
   ingredients: [],
   loading: false,
   error: null,
-  selectedIngredient: null,
-  tab: 'buns'
+  selectedIngredient: [],
+  tab: "buns",
 };
 
 export function ingredientsReducer(state = initialState, action) {
@@ -28,8 +28,8 @@ export function ingredientsReducer(state = initialState, action) {
     case GET_SELECTED_INGREDIENTS: {
       return { ...state, selectedIngredient: action.payload };
     }
-    case SWITCH_TAB:{
-      return {...state, tab:action.payload}
+    case SWITCH_TAB: {
+      return { ...state, tab: action.payload };
     }
     default:
       return state;

@@ -1,0 +1,28 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  row-gap: 24px;
+  align-items: center;
+  margin-top: 180px;
+}
+
+.instruction {
+  display: flex;
+  column-gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.activeText {
+  color: #4c4cff;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.instructionContainer {
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+  align-items: center;
+  margin-top: 56px;
+}

@@ -1,7 +1,12 @@
 import image from "../../../images/done.svg";
 import styles from "./order-details.module.css";
 import PropTypes from "prop-types";
+import { useSelector } from "react-redux";
 export default function OrderDetails({ orderNumber }) {
+  const isAuth = useSelector((state) => state.userLogicReducer.isAuth);
+
+  
+
   return (
     <div className={`${styles.container} mt-4`}>
       <p className={`${styles.digits} text text_type_digits-large`}>

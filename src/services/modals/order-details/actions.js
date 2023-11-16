@@ -1,3 +1,7 @@
+import { baseUrl } from "../../../components/app/app";
+import { onResponse } from "../../../utils/on-response";
+import { request } from "../../../utils/request";
+
 export const OPEN_MODAL_ORDER_DETAILS = "OPEN_MODAL_ORDER_DETAILS";
 export const CLOSE_MODAL_ORDER_DETAILS = "CLOSE_MODAL_ORDER_DETAILS";
 export const SUBMIT_ORDER_NUMBER_SUCCESS = "SUBMIT_ORDER_NUMBER_SUCCESS";
@@ -25,19 +29,13 @@ export const submitOrder = (constructorIngredients) => {
     const ingredId = constructorIngredients.ingredients.map((item) => item._id);
     const bunId = constructorIngredients.bun._id;
     const ingredientsId = [bunId, ...ingredId, bunId];
-    return fetch("https://norma.nomoreparties.space/api/orders", {
+    return request(`${baseUrl}/api/orders`, {
       method: "POST",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({
         ingredients: ingredientsId,
       }),
     })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка ${res.status}`);
-      })
       .then((data) => {
         dispatch(setOrderNumber(data.order.number));
         dispatch(openOrderModal());

@@ -7,10 +7,11 @@
     0px 4px 8px 0px rgba(0, 0, 0, 0.04), 0px 16px 24px 0px rgba(0, 0, 0, 0.04),
     0px 24px 32px 0px rgba(0, 0, 0, 0.04);
 }
-.container {
+.linkContainer {
   display: flex;
   flex-direction: row;
   column-gap: 8px;
+  align-items: center;
 }
 .block {
   display: flex;

@@ -8,7 +8,6 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 export default function ConstructorBurgersPage() {
   return (
     <div className={styles.app}>
-      <AppHeader />
       <DndProvider backend={HTML5Backend}>
         <main className={styles.container}>
           <BurgerIngridients />

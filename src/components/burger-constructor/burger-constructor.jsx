@@ -13,10 +13,12 @@ import { useCalculateCost } from "../../hooks/useCalculateCost";
 import { useDrop } from "react-dnd";
 import { dropIngredientsAction } from "../../services/burger-constructor/actions";
 import update from "immutability-helper";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
+import { useNavigate } from "react-router";
 function BurgerConstructor() {
   const { orderDetailsModal, closeOrderModal } = useModal();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const constructorIngredients = useSelector(
     (state) => state.constructorIngredientsReducer
   );
@@ -24,8 +26,14 @@ function BurgerConstructor() {
   const orderNumber = useSelector(
     (state) => state.orderDetailsModal.orderNumber
   );
+  const user = useSelector((state) => state.userLogicReducer.user);
+  const isAuth = useSelector((state) => state.userLogicReducer.isAuth);
   function handleOrderDetails() {
-    dispatch(submitOrder(constructorIngredients));
+    if (!user) {
+      navigate("/login");
+    } else {
+      dispatch(submitOrder(constructorIngredients));
+    }
   }
   ///счетчик стоимости
   useCalculateCost(constructorIngredients);
