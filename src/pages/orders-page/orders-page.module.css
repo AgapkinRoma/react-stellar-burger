@@ -1,0 +1,129 @@
+.componentContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.mainContainer {
+  width: 1200px;
+  display: flex;
+  flex-direction: row;
+  column-gap: 60px;
+}
+
+.scrollContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-height: 1200px;
+  overflow-y: scroll;
+  scrollbar-width: none;
+  border: none;
+  outline: none;
+}
+.ordersContainer::-webkit-scrollbar {
+  width: 1;
+}
+
+.orderBlock {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  border-radius: 40px;
+  background: var(--interface-modal-bg, #1c1c21);
+  box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.04),
+    0px 0px 2px 0px rgba(0, 0, 0, 0.06), 0px 4px 8px 0px rgba(0, 0, 0, 0.04);
+  min-width: 700px;
+}
+.idBlock {
+  display: flex;
+  justify-content: space-between;
+}
+
+.ingredient {
+  display: flex;
+  width: 64px;
+  height: 56px;
+  padding: 4px 0px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100px;
+  border: 2px solid var(--button-normal, #801ab2);
+  background: var(--interface-bg, #131316);
+  position: relative;
+}
+.ingredientImg {
+  width: 112px;
+  height: 56px;
+  flex-shrink: 0;
+}
+.ingredientsAndPriceBlock {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.priceBlock {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.ordersBoard {
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+}
+
+.ordersDigits {
+  text-shadow: 0px 4px 32px rgba(51, 51, 255, 0.5),
+    0px 0px 8px rgba(51, 51, 255, 0.25), 0px 0px 16px rgba(51, 51, 255, 0.25);
+}
+
+.ordersInfoComponent {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+  margin-top: 92px;
+}
+
+.ingredientContainer {
+  display: flex;
+  flex-direction: row;
+  gap: -5px;
+  max-width: 600px;
+  overflow: hidden;
+}
+.readyContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.readyDigits {
+  color: #00cccc;
+}
+.link {
+  text-decoration: none;
+  color: white;
+}
+
+.ordersContainer {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 300px;
+  max-height: 315px;
+  gap: 8px;
+}
+.countIngredient {
+  position: absolute;
+  border-radius: 100%;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(28, 28, 33, 0.6);
+  top: 0;
+  left: 0;
+}

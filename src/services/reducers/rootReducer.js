@@ -7,6 +7,8 @@ import { constructorIngredientsReducer } from "../burger-constructor/reducer";
 import { forgotPasswordReducer } from "../pages/forgot-password/reducer";
 import { resetPasswordReducer } from "../pages/reset-password/reducer";
 import { userLogicReducer } from "../pages/user/reducer";
+import { allOrderReducer } from "../all-orders/reducer";
+import { userOrderReducer } from "../user-orders/reducer";
 export const rootReducer = combineReducers({
   orderDetailsModal,
   ingredientsDetailsModal,
@@ -16,4 +18,6 @@ export const rootReducer = combineReducers({
   forgotPasswordReducer,
   resetPasswordReducer,
   userLogicReducer,
+  allOrderReducer,
+  userOrderReducer,
 });

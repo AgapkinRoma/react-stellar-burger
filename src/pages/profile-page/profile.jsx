@@ -4,7 +4,6 @@ import { NavLink, Outlet, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { getUser, submitLogoutt } from "../../services/pages/user/action";
 import { setActive } from "../../utils/set-active/set-active";
-
 export default function ProfilePage() {
   const dispatch = useDispatch();
   const location = useLocation();

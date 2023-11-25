@@ -4,7 +4,7 @@ function ModalOverylay(props) {
   return <div onClick={props.onClick} className={styles.overlay}></div>;
 }
 
-ModalOverylay.propsType={
-  onClick:PropTypes.func.isRequired
-}
+ModalOverylay.propsType = {
+  onClick: PropTypes.func.isRequired,
+};
 export default ModalOverylay;

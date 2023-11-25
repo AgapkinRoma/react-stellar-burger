@@ -4,6 +4,7 @@ import {
   SUBMIT_ORDER_NUMBER_SUCCESS,
   SUBMIT_ORDER_NUMBER_REQUEST,
   SUBMIT_ORDER_NUMBER_FAILED,
+  GET_ORDER_NUMBER,
 } from "./actions";
 
 const initialState = {
@@ -44,6 +45,13 @@ export function orderDetailsModal(state = initialState, action) {
         ...state,
         loading: false,
         error: action.payload,
+      };
+    }
+
+    case GET_ORDER_NUMBER: {
+      return {
+        ...state,
+        orderNumber: action.payload,
       };
     }
     default:

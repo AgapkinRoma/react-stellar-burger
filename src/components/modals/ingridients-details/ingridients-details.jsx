@@ -4,8 +4,6 @@ import { useLocation, useParams } from "react-router";
 import { useSelector } from "react-redux";
 export default function IngridientsDetails() {
   const { id } = useParams();
-  const location = useLocation();
-  const pathName = location.pathname;
 
   const ingredient = useSelector((state) =>
     state.ingredientsReducer.ingredients.find((item) => item._id === id)

@@ -1,0 +1,50 @@
+.priceContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
+  width: 150px;
+}
+.componentContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.imageContainer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.text {
+  width: 320px;
+}
+.price {
+  width: 100px;
+}
+.scrollContainer {
+  max-height: 300px;
+  overflow-y: scroll;
+  margin-top: 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 625px;
+}
+
+.totalPrice {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ingredientImage {
+  width: 112px;
+  height: 56px;
+}
+.costContainer {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}

@@ -1,4 +1,3 @@
-//pages
 import AppHeader from "../app-header/app-header";
 import ConstructorBurgersPage from "../../pages/home-page/constructor-burgers-page";
 import { Routes, Route, useNavigate } from "react-router-dom";
@@ -18,7 +17,8 @@ import IngridientsDetails from "../modals/ingridients-details/ingridients-detail
 import Modal from "../modals/modal/modal";
 import { useLocation } from "react-router-dom";
 import { getIngredients } from "../../services/burger-ingredients/actions";
-import OrdersHistory from "../../pages/profile-page/orders-history";
+import OrderInfo from "../modals/order-info/order-info";
+import OrdersCards from "../../pages/orders-page/orders-cards";
 export const url = "https://norma.nomoreparties.space/api/ingredients";
 export const baseUrl = "https://norma.nomoreparties.space";
 
@@ -44,7 +44,6 @@ function App() {
       <AppHeader />
       <Routes location={background || location}>
         <Route path="/" element={<ConstructorBurgersPage />} />
-
         <Route path="/ingredients/:id" element={<IngridientsDetails />} />
 
         <Route
@@ -68,15 +67,12 @@ function App() {
           element={<OnlyAuth component={<ProfilePage />} />}
         >
           <Route index element={<ProfileData />} />
-          <Route path="orders" element={<OrdersHistory />} />
-
-          <Route />
+          <Route path="orders" element={<OrdersCards />} />
+          <Route path="orders/:number" element={<OrderInfo />} />
         </Route>
 
-        <Route
-          path="/orders-list"
-          element={<OnlyAuth component={<OrdersPage />} />}
-        />
+        <Route path="/feed" element={<OnlyAuth component={<OrdersPage />} />} />
+        <Route path="/feed/:number" element={<OrderInfo />}></Route>
       </Routes>
 
       {background && (
@@ -86,6 +82,30 @@ function App() {
             element={
               <Modal onClose={handleModalClose}>
                 <IngridientsDetails />
+              </Modal>
+            }
+          />
+        </Routes>
+      )}
+      {background && (
+        <Routes>
+          <Route
+            path="/feed/:number"
+            element={
+              <Modal onClose={handleModalClose}>
+                <OrderInfo />
+              </Modal>
+            }
+          />
+        </Routes>
+      )}
+      {background && (
+        <Routes>
+          <Route
+            path="profile/orders/:number"
+            element={
+              <Modal onClose={handleModalClose}>
+                <OrderInfo />
               </Modal>
             }
           />

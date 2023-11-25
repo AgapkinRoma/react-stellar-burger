@@ -7,8 +7,6 @@ const ProtectedRoute = ({ onlyUnAuth = false, component }) => {
   const location = useLocation();
 
   if (!isAuth) {
-    //не забыть сделать прелоадер
-
     return null;
   }
 
