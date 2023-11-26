@@ -71,7 +71,7 @@ function App() {
           <Route path="orders/:number" element={<OrderInfo />} />
         </Route>
 
-        <Route path="/feed" element={<OnlyAuth component={<OrdersPage />} />} />
+        <Route path="/feed" element={<OrdersPage />} />
         <Route path="/feed/:number" element={<OrderInfo />}></Route>
       </Routes>
 
@@ -102,7 +102,7 @@ function App() {
       {background && (
         <Routes>
           <Route
-            path="profile/orders/:number"
+            path="/profile/orders/:number"
             element={
               <Modal onClose={handleModalClose}>
                 <OrderInfo />

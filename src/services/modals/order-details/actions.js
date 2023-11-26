@@ -28,30 +28,28 @@ export const openOrderModal = () => {
   return { type: OPEN_MODAL_ORDER_DETAILS };
 };
 export const submitOrder = (constructorIngredients) => {
-  return function (dispatch) {
-    dispatch(setOrderNumberRequest);
-
+  return async function (dispatch) {
+    dispatch(setOrderNumberRequest());
     const ingredId = constructorIngredients.ingredients.map((item) => item._id);
     const bunId = constructorIngredients.bun._id;
     const ingredientsId = [bunId, ...ingredId, bunId];
-    return request(`${baseUrl}/api/orders`, {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-        authorization: "Bearer" + localStorage.getItem("accessToken"),
-      },
-      body: JSON.stringify({
-        ingredients: ingredientsId,
-      }),
-    })
-      .then((data) => {
-        dispatch(setOrderNumber(data.order.number));
-        dispatch(openOrderModal());
-      })
-      .catch((error) => {
-        console.log(`Упс ошибка - ${error}`);
-        dispatch(setOrderNumberFailed(error));
+    try {
+      const data = await request(`${baseUrl}/api/orders`, {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+          authorization: "Bearer" + localStorage.getItem("accessToken"),
+        },
+        body: JSON.stringify({
+          ingredients: ingredientsId,
+        }),
       });
+      dispatch(setOrderNumber(data.order.number));
+      dispatch(openOrderModal());
+    } catch (error) {
+      console.log(`Упс ошибка - ${error}`);
+      dispatch(setOrderNumberFailed(error));
+    }
   };
 };
 // GET https://norma.nomoreparties.space/api/orders/{номер заказа}
@@ -65,7 +63,7 @@ export const getOrderNumber = (number) => {
       },
     })
       .then((data) => {
-        dispatch(getOrderNumber(data.order.number));
+        dispatch(getOrderNumber(data.number));
       })
       .catch((error) => {
         console.log(`Упс ошибка - ${error}`);

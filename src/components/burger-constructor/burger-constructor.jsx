@@ -11,10 +11,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { submitOrder } from "../../services/modals/order-details/actions";
 import { useCalculateCost } from "../../hooks/useCalculateCost";
 import { useDrop } from "react-dnd";
-import { dropIngredientsAction } from "../../services/burger-constructor/actions";
+import {
+  cleanIngredientsAction,
+  dropIngredientsAction,
+} from "../../services/burger-constructor/actions";
 import update from "immutability-helper";
 import { v4 as uuidv4 } from "uuid";
 import { useNavigate } from "react-router";
+import Loader from "../modals/loader/loader";
 function BurgerConstructor() {
   const { orderDetailsModal, closeOrderModal } = useModal();
   const dispatch = useDispatch();
@@ -22,6 +26,7 @@ function BurgerConstructor() {
   const constructorIngredients = useSelector(
     (state) => state.constructorIngredientsReducer
   );
+  const isLoading = useSelector((state) => state.orderDetailsModal.loading);
   const costState = useSelector((state) => state.costReducer);
   const orderNumber = useSelector(
     (state) => state.orderDetailsModal.orderNumber
@@ -32,7 +37,9 @@ function BurgerConstructor() {
     if (!user) {
       navigate("/login");
     } else {
-      dispatch(submitOrder(constructorIngredients));
+      dispatch(submitOrder(constructorIngredients)).then(() =>
+        dispatch(cleanIngredientsAction())
+      );
     }
   }
   ///счетчик стоимости
@@ -77,8 +84,13 @@ function BurgerConstructor() {
           </div>
 
           {orderDetailsModal && (
-            <Modal onClose={closeOrderModal}>
+            <Modal  onClose={closeOrderModal}>
               <OrderDetails orderNumber={orderNumber} />
+            </Modal>
+          )}
+          {isLoading && (
+            <Modal closeIcon={false} onClose={closeOrderModal}>
+              <Loader />
             </Modal>
           )}
         </>

@@ -11,6 +11,7 @@ import {
   allIngredientsSelector,
   allOrdersSelector,
   orderNumberSelector,
+  selectedOrderSelector,
   userOrdersSelector,
 } from "../../../services/selectors/selectors";
 import { useEffect } from "react";
@@ -23,7 +24,7 @@ export default function OrderInfo() {
   const ingredinets = useSelector(allIngredientsSelector);
   const allOrders = useSelector(allOrdersSelector);
   const userOrders = useSelector(userOrdersSelector);
-  const orderNumber = useSelector(orderNumberSelector);
+  const orderNumber = useSelector(selectedOrderSelector);
   const orders = useSelector((store) => {
     const order = allOrders.find((order) => order.number == number);
     if (order) {
@@ -56,7 +57,7 @@ export default function OrderInfo() {
       .length;
   };
 
-  const uniqueIngredients = Array.from(new Set(ingredientOrders));
+  const setIngredients = Array.from(new Set(ingredientOrders));
 
   return (
     <div>
@@ -68,7 +69,7 @@ export default function OrderInfo() {
 
       <div className={`${styles.scrollContainer} custom-scroll`}>
         <p className="text text_type_main-medium ">Состав:</p>
-        {uniqueIngredients.map((ingredient) => (
+        {setIngredients.map((ingredient) => (
           <OrderInfoIngredient
             count={countIngredients(ingredient)}
             ingredient={ingredient}

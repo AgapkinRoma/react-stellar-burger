@@ -12,6 +12,7 @@ const initialState = {
   orderNumber: null,
   loading: false,
   error: null,
+  selectedOrder: 0,
 };
 export function orderDetailsModal(state = initialState, action) {
   switch (action.type) {
@@ -37,6 +38,7 @@ export function orderDetailsModal(state = initialState, action) {
       return {
         ...state,
         orderNumber: action.payload,
+        loading: false,
       };
     }
 
@@ -51,7 +53,7 @@ export function orderDetailsModal(state = initialState, action) {
     case GET_ORDER_NUMBER: {
       return {
         ...state,
-        orderNumber: action.payload,
+        selectedOrder: action.payload,
       };
     }
     default:

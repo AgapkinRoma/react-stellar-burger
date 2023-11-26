@@ -3,6 +3,7 @@ import {
   SET_INGREDIENTS,
   DELETE_INGREDIENTS,
   DRAG_INGREDIENTS,
+  CLEAN_INGREDIENTS,
 } from "./actions";
 import { v4 as uuid } from "uuid";
 const initialState = {
@@ -36,6 +37,14 @@ export function constructorIngredientsReducer(state = initialState, action) {
       return {
         ...state,
         ingredients: action.payload,
+      };
+    }
+
+    case CLEAN_INGREDIENTS: {
+      return {
+        ...state,
+        bun: null,
+        ingredients: [],
       };
     }
     default:
