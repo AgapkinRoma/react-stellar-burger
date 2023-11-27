@@ -5,7 +5,7 @@ import ingrdientStyles from "../../../pages/orders-page/orders-page.module.css";
 export default function OrderInfoIngredient({ ingredient, count }) {
   const { image_mobile, name, price } = ingredient;
   return (
-    <div className={`${styles.componentContainer} custom-scroll`}>
+    <div className={`${styles.ingredientComponentContainer} custom-scroll`}>
       <div className={styles.imageContainer}>
         <div className={ingrdientStyles.ingredient}>
           <img

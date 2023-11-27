@@ -19,6 +19,7 @@ import { useLocation } from "react-router-dom";
 import { getIngredients } from "../../services/burger-ingredients/actions";
 import OrderInfo from "../modals/order-info/order-info";
 import OrdersCards from "../../pages/orders-page/orders-cards";
+import OrderInfoPage from "../modals/order-info/order-info-page";
 export const url = "https://norma.nomoreparties.space/api/ingredients";
 export const baseUrl = "https://norma.nomoreparties.space";
 
@@ -68,11 +69,10 @@ function App() {
         >
           <Route index element={<ProfileData />} />
           <Route path="orders" element={<OrdersCards />} />
-          <Route path="orders/:number" element={<OrderInfo />} />
         </Route>
-
+        <Route path="profile/orders/:number" element={<OrderInfoPage />} />
         <Route path="/feed" element={<OrdersPage />} />
-        <Route path="/feed/:number" element={<OrderInfo />}></Route>
+        <Route path="/feed/:number" element={<OrderInfoPage />} />
       </Routes>
 
       {background && (

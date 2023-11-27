@@ -35,6 +35,7 @@ function Modal(props) {
         <div className={styles.titleContainer}>
           <p className="text text_type_main-large">{props.title}</p>
           <div className={styles.closeIcon}>
+            
             <CloseIcon onClick={closeModal}></CloseIcon>
           </div>
         </div>

@@ -4,7 +4,7 @@ import {
   SUBMIT_ORDER_NUMBER_SUCCESS,
   SUBMIT_ORDER_NUMBER_REQUEST,
   SUBMIT_ORDER_NUMBER_FAILED,
-  GET_ORDER_NUMBER,
+  GET_ORDER_SUCCESS,
 } from "./actions";
 
 const initialState = {
@@ -50,7 +50,7 @@ export function orderDetailsModal(state = initialState, action) {
       };
     }
 
-    case GET_ORDER_NUMBER: {
+    case GET_ORDER_SUCCESS: {
       return {
         ...state,
         selectedOrder: action.payload,

@@ -1,3 +1,10 @@
+.infoPageContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 100px;
+}
 .priceContainer {
   display: flex;
   flex-direction: row;
@@ -6,6 +13,12 @@
   width: 150px;
 }
 .componentContainer {
+  max-width: 625px;
+}
+.doneColor {
+  color: #00cccc;
+}
+.ingredientComponentContainer {
   display: flex;
   flex-direction: row;
   align-items: center;

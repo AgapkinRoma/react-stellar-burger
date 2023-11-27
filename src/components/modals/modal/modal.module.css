@@ -11,7 +11,7 @@
 .closeIcon {
   cursor: pointer;
 }
-.noneIcon{
+.noneIcon {
   width: 0;
   height: 0;
 }
@@ -41,4 +41,33 @@
   box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.04),
     0px 4px 8px 0px rgba(0, 0, 0, 0.04), 0px 16px 24px 0px rgba(0, 0, 0, 0.04),
     0px 24px 32px 0px rgba(0, 0, 0, 0.04);
+}
+.loaderContent {
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.rotateImage {
+  animation: spin 1s infinite linear;
+}
+
+.rotateImageContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.bottomImg {
+  transform: rotate(180deg);
 }

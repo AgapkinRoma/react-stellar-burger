@@ -1,13 +1,14 @@
 import { baseUrl } from "../../../components/app/app";
 import { onResponse } from "../../../utils/on-response";
 import { request } from "../../../utils/request";
+import { cleanIngredientsAction } from "../../burger-constructor/actions";
 
 export const OPEN_MODAL_ORDER_DETAILS = "OPEN_MODAL_ORDER_DETAILS";
 export const CLOSE_MODAL_ORDER_DETAILS = "CLOSE_MODAL_ORDER_DETAILS";
 export const SUBMIT_ORDER_NUMBER_SUCCESS = "SUBMIT_ORDER_NUMBER_SUCCESS";
 export const SUBMIT_ORDER_NUMBER_REQUEST = "SUBMIT_ORDER_NUMBER_REQUEST";
 export const SUBMIT_ORDER_NUMBER_FAILED = "SUBMIT_ORDER_NUMBER_FAILED";
-export const GET_ORDER_NUMBER = "GET_ORDER_NUMBER";
+export const GET_ORDER_SUCCESS = "GET_ORDER_SUCCESS";
 
 const setOrderNumberRequest = () => ({
   type: SUBMIT_ORDER_NUMBER_REQUEST,
@@ -22,7 +23,7 @@ export const setOrderNumber = (orderNumber) => {
 };
 
 export const getOrderNumberAction = (orderNumber) => {
-  return { type: GET_ORDER_NUMBER, payload: orderNumber };
+  return { type: GET_ORDER_SUCCESS, payload: orderNumber };
 };
 export const openOrderModal = () => {
   return { type: OPEN_MODAL_ORDER_DETAILS };
@@ -44,8 +45,7 @@ export const submitOrder = (constructorIngredients) => {
           ingredients: ingredientsId,
         }),
       });
-      dispatch(setOrderNumber(data.order.number));
-      dispatch(openOrderModal());
+      dispatch(setOrderNumber(data.order.number))
     } catch (error) {
       console.log(`Упс ошибка - ${error}`);
       dispatch(setOrderNumberFailed(error));
@@ -56,14 +56,14 @@ export const submitOrder = (constructorIngredients) => {
 
 export const getOrderNumber = (number) => {
   return function (dispatch) {
-    return request(`${baseUrl}/api/orders${number}`, {
+    return request(`${baseUrl}/api/orders/${number}`, {
       method: "GET",
       headers: {
         "Content-type": "application/json",
       },
     })
       .then((data) => {
-        dispatch(getOrderNumber(data.number));
+        dispatch(getOrderNumberAction(data.orders[0]));
       })
       .catch((error) => {
         console.log(`Упс ошибка - ${error}`);

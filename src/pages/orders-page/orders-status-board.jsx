@@ -1,9 +1,14 @@
 import React from "react";
 import styles from "./orders-page.module.css";
 import { useSelector } from "react-redux";
+import { allOrdersSelector } from "../../services/selectors/selectors";
+import { v4 as uuidv4 } from "uuid";
 export default function OrdersStatusBoard() {
   const totalInfo = useSelector((state) => state.allOrderReducer.data);
-  const orders = useSelector((state) => state.allOrderReducer.data.orders);
+  const orders = useSelector(allOrdersSelector);
+  if (!orders) {
+    return null;
+  }
   const { total, totalToday } = totalInfo;
 
   return (
@@ -13,15 +18,14 @@ export default function OrdersStatusBoard() {
           <h3 className="text text_type_main-medium">Готово:</h3>
           <div className={styles.ordersContainer}>
             {Array.isArray(orders) &&
-              orders
-                .slice(0, 20)
-                .map((order) => (
-                  <span
-                    className={`${styles.readyDigits} text text_type_digits-default`}
-                  >
-                    {order.status === "done" ? order.number : ""}
-                  </span>
-                ))}
+              orders.slice(0, 20).map((order) => (
+                <span
+                  key={order._id}
+                  className={`${styles.readyDigits} text text_type_digits-default`}
+                >
+                  {order.status === "done" ? order.number : ""}
+                </span>
+              ))}
           </div>
         </div>
         <div className={styles.ordersContainer}>
@@ -29,6 +33,7 @@ export default function OrdersStatusBoard() {
           {Array.isArray(orders) &&
             orders.map((order) => (
               <span
+                key={order._id}
                 className={`${styles.readyDigits} text text_type_digits-default`}
               >
                 {order.status !== "done" ? order.number : ""}

@@ -7,7 +7,7 @@ import {
 
 const initialState = {
   status: "OFFLINE",
-  data: {},
+  data: null,
   error: null,
 };
 

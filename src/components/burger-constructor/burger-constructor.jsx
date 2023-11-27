@@ -8,7 +8,10 @@ import OrderDetails from "../modals/order-details/order-details";
 import { useModal } from "../../hooks/useModal";
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { submitOrder } from "../../services/modals/order-details/actions";
+import {
+  openOrderModal,
+  submitOrder,
+} from "../../services/modals/order-details/actions";
 import { useCalculateCost } from "../../hooks/useCalculateCost";
 import { useDrop } from "react-dnd";
 import {
@@ -20,7 +23,7 @@ import { v4 as uuidv4 } from "uuid";
 import { useNavigate } from "react-router";
 import Loader from "../modals/loader/loader";
 function BurgerConstructor() {
-  const { orderDetailsModal, closeOrderModal } = useModal();
+  const { orderDetailsModal, openOrderModal, closeOrderModal } = useModal();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const constructorIngredients = useSelector(
@@ -32,13 +35,13 @@ function BurgerConstructor() {
     (state) => state.orderDetailsModal.orderNumber
   );
   const user = useSelector((state) => state.userLogicReducer.user);
-  const isAuth = useSelector((state) => state.userLogicReducer.isAuth);
+
   function handleOrderDetails() {
     if (!user) {
       navigate("/login");
     } else {
       dispatch(submitOrder(constructorIngredients)).then(() =>
-        dispatch(cleanIngredientsAction())
+        openOrderModal()
       );
     }
   }
@@ -82,16 +85,14 @@ function BurgerConstructor() {
               Оформить заказ
             </Button>
           </div>
-
-          {orderDetailsModal && (
-            <Modal  onClose={closeOrderModal}>
-              <OrderDetails orderNumber={orderNumber} />
-            </Modal>
-          )}
-          {isLoading && (
-            <Modal closeIcon={false} onClose={closeOrderModal}>
-              <Loader />
-            </Modal>
+          {isLoading ? (
+            <Loader></Loader>
+          ) : (
+            orderDetailsModal && (
+              <Modal onClose={closeOrderModal}>
+                <OrderDetails orderNumber={orderNumber} />
+              </Modal>
+            )
           )}
         </>
       ) : (
