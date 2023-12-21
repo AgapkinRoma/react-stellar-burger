@@ -8,7 +8,7 @@ import {
 import styles from "./order-info.module.css";
 
 import { allIngredientsSelector } from "../../../services/selectors/selectors";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { useDispatch } from "react-redux";
 import { getOrderNumber } from "../../../services/modals/order-details/actions";
 
@@ -16,7 +16,6 @@ export default function OrderInfo() {
   const dispatch = useDispatch();
   const { number } = useParams();
   const ingredinets = useSelector(allIngredientsSelector);
-
   const order = useSelector((store) => {
     let order = store.allOrderReducer.data?.orders?.find(
       (order) => order.number == number
@@ -34,12 +33,14 @@ export default function OrderInfo() {
       return store.orderDetailsModal.selectedOrder;
     }
   });
+
   useEffect(() => {
     if (!order) {
       console.log("test");
       dispatch(getOrderNumber(number));
     }
   }, []);
+
   if (!order) {
     return <h2>Загрузка...</h2>;
   }
@@ -49,9 +50,10 @@ export default function OrderInfo() {
   });
 
   const price = ingredientOrders.reduce(
-    (sum, ingredient) => sum + ingredient.price,
+    (sum, ingredient) => sum + (ingredient?.price || 0),
     0
   );
+
   const countIngredients = (ingredient) => {
     return ingredientOrders?.filter((item) => item._id === ingredient._id)
       .length;

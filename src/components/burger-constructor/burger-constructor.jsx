@@ -22,19 +22,22 @@ import update from "immutability-helper";
 import { v4 as uuidv4 } from "uuid";
 import { useNavigate } from "react-router";
 import Loader from "../modals/loader/loader";
+import {
+  constructorIngredientsSelector,
+  costStateSelector,
+  isLoadingSelector,
+  orderNumberSelector,
+  userSelector,
+} from "../../services/selectors/selectors";
 function BurgerConstructor() {
   const { orderDetailsModal, openOrderModal, closeOrderModal } = useModal();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const constructorIngredients = useSelector(
-    (state) => state.constructorIngredientsReducer
-  );
-  const isLoading = useSelector((state) => state.orderDetailsModal.loading);
-  const costState = useSelector((state) => state.costReducer);
-  const orderNumber = useSelector(
-    (state) => state.orderDetailsModal.orderNumber
-  );
-  const user = useSelector((state) => state.userLogicReducer.user);
+  const constructorIngredients = useSelector(constructorIngredientsSelector);
+  const isLoading = useSelector(isLoadingSelector);
+  const costState = useSelector(costStateSelector);
+  const orderNumber = useSelector(orderNumberSelector);
+  const user = useSelector(userSelector);
 
   function handleOrderDetails() {
     if (!user) {
