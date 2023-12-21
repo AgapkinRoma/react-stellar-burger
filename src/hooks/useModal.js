@@ -8,6 +8,7 @@ import {
   CLOSE_MODAL_INGREDIENTS_DETAILS,
   OPEN_MODAL_INGREDIENTS_DETAILS,
 } from "../services/modals/ingredients-details/action";
+import { cleanIngredientsAction } from "../services/burger-constructor/actions";
 
 export const useModal = () => {
   const dispatch = useDispatch();
@@ -20,6 +21,7 @@ export const useModal = () => {
 
   const closeOrderModal = useCallback(() => {
     dispatch({ type: CLOSE_MODAL_ORDER_DETAILS });
+    dispatch(cleanIngredientsAction());
   }, []);
 
   const ingredientsDetailsModal = useSelector(

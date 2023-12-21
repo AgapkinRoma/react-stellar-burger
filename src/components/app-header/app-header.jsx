@@ -21,7 +21,7 @@ function AppHeader() {
               <span>Конструктор</span>
             </div>
           </NavLink>
-          <NavLink to="/orders-list" className={setActive}>
+          <NavLink to="/feed" className={setActive}>
             <div className={styles.linkContainer}>
               <ListIcon type={setType("/orders-list")} />
               <span>Лента заказов</span>

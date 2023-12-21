@@ -6,7 +6,6 @@
   display: flex;
   flex-direction: row;
   column-gap: 60px;
-  margin-top: 120px;
   width: 1200px;
 }
 
@@ -15,6 +14,7 @@
   flex-direction: column;
   width: 320px;
   flex-shrink: 0;
+  margin-top: 120px;
 }
 
 .linkName {
@@ -43,6 +43,7 @@
   display: flex;
   flex-direction: column;
   row-gap: 24px;
+  margin-top: 120px;
 }
 .buttonContainer {
   display: flex;

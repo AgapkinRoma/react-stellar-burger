@@ -1,30 +1,16 @@
 import styles from "./burger-ingridients.module.css";
-import PropTypes from "prop-types";
-import IngridientsDetails from "../modals/ingridients-details/ingridients-details.jsx";
-import React, {
-  useState,
-  useContext,
-  useEffect,
-  useRef,
-  useMemo,
-  useCallback,
-} from "react";
-import Modal from "../modals/modal/modal";
+import React, { useRef, useCallback } from "react";
 import Ingridients from "./ingridients/ingridients";
-import { ingredientPropType } from "../../utils/prop-types";
 import { useModal } from "../../hooks/useModal";
-import {
-  getIngredients,
-  switchTabAction,
-} from "../../services/burger-ingredients/actions";
+import { switchTabAction } from "../../services/burger-ingredients/actions";
 import { useDispatch, useSelector } from "react-redux";
-import { getSelectedIngredientsActionRequest } from "../../services/burger-ingredients/actions";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 
 function BurgerIngridients() {
   const ingredients = useSelector(
     (state) => state.ingredientsReducer.ingredients
   );
+  console.log(ingredients);
   const selectedIngredient = useSelector(
     (state) => state.ingredientsReducer.selectedIngredient
   );
@@ -43,18 +29,9 @@ function BurgerIngridients() {
   const topingRef = useRef(null);
   const currentTab = useSelector((state) => state.ingredientsReducer.tab);
 
-  const {
-    ingredientsDetailsModal,
-    openIngredientsModal,
-    closeIngredientsModal,
-  } = useModal();
+  const { openIngredientsModal } = useModal();
   const dispatch = useDispatch();
-  const handleOpenModal = (item) => {
-    dispatch(getSelectedIngredientsActionRequest(item));
-    openIngredientsModal();
-  };
 
- 
   function handleScroll() {
     const tabsBottom = tabsRef?.current.getBoundingClientRect().bottom;
     const bunsTop = bunsRef?.current.getBoundingClientRect().top;

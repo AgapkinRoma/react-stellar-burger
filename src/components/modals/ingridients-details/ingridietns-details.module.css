@@ -14,10 +14,9 @@
   align-items: center;
   justify-content: center;
   align-items: center;
- 
 }
 
-.containerFullScreen{
+.containerFullScreen {
   margin-top: 200px;
   display: flex;
   flex-direction: column;

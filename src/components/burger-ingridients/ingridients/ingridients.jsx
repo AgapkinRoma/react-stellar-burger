@@ -1,9 +1,6 @@
 import React from "react";
 import ingridientStyles from "../burger-ingridients.module.css";
-import {
-  CurrencyIcon,
-  HideIcon,
-} from "@ya.praktikum/react-developer-burger-ui-components";
+import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import PropTypes from "prop-types";
 import { ingredientPropType } from "../../../utils/prop-types";
 import { useDrag } from "react-dnd";
@@ -24,7 +21,12 @@ export default function Ingridients(props) {
 
   return (
     !isDrag && (
-      <Link className={`${ingridientStyles.link} text text_type_digits-default`} key={id} to={`/ingredients/${id}`} state={{ background: location }}>
+      <Link
+        className={`${ingridientStyles.link} text text_type_digits-default`}
+        key={id}
+        to={`/ingredients/${id}`}
+        state={{ background: location }}
+      >
         <div ref={dragRef} className={ingridientStyles.ingridientBlock}>
           {count >= 1 && <Counter count={count} />}
           <img src={item.image} alt={item.name}></img>
