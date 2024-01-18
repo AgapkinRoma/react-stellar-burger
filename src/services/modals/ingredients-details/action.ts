@@ -1,11 +1,13 @@
-import * as ActionTypes from './constants'
+import * as ActionTypes from "./constants";
 
 interface IOpenModalIngredientsDetails {
-  type:typeof ActionTypes.OPEN_MODAL_INGREDIENTS_DETAILS
+  type: typeof ActionTypes.OPEN_MODAL_INGREDIENTS_DETAILS;
 }
 
 interface ICloseModalIngredientsDetails {
-  type:typeof ActionTypes.CLOSE_MODAL_INGREDIENTS_DETAILS
+  type: typeof ActionTypes.CLOSE_MODAL_INGREDIENTS_DETAILS;
 }
 
-export type TModalIngredientsDetailsActions = IOpenModalIngredientsDetails|ICloseModalIngredientsDetails
+export type TModalIngredientsDetailsActions =
+  | IOpenModalIngredientsDetails
+  | ICloseModalIngredientsDetails;

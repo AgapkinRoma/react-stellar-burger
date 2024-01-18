@@ -1,22 +1,25 @@
 import { TOrderDetailsActions } from "./actions";
 import * as ActionTypes from "./constants";
 import { IAllOrders } from "../../all-orders/reducer";
-export type TOrderDetailsInitialState={
-  ordersModal:boolean;
-  orderNumber:number|null;
-  loading:boolean;
-  error:string|null;
-  selectedOrder:IAllOrders|null
-}
+export type TOrderDetailsInitialState = {
+  ordersModal: boolean;
+  orderNumber: string | null;
+  loading: boolean;
+  error: string | null;
+  selectedOrder: IAllOrders | null;
+};
 
-const initialState:TOrderDetailsInitialState = {
+const initialState: TOrderDetailsInitialState = {
   ordersModal: false,
   orderNumber: null,
   loading: false,
   error: null,
   selectedOrder: null,
 };
-export function orderDetailsModal(state = initialState, action:TOrderDetailsActions):TOrderDetailsInitialState {
+export function orderDetailsModal(
+  state = initialState,
+  action: TOrderDetailsActions
+): TOrderDetailsInitialState {
   switch (action.type) {
     case ActionTypes.OPEN_MODAL_ORDER_DETAILS: {
       return {

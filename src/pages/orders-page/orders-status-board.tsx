@@ -1,12 +1,10 @@
 import React from "react";
 import styles from "./orders-page.module.css";
-import { useSelector } from "react-redux";
 import { allOrdersSelector } from "../../services/selectors/selectors";
-import { v4 as uuidv4 } from "uuid";
-import { TypedUseSelector } from "../../hooks/hooks";
+import { useAppSelector } from "../../hooks/hooks";
 export default function OrdersStatusBoard() {
-  const totalInfo = TypedUseSelector((state) => state.allOrderReducer.data);
-  const orders = useSelector(allOrdersSelector);
+  const totalInfo = useAppSelector((state) => state.allOrderReducer.data);
+  const orders = useAppSelector(allOrdersSelector);
   if (!orders) {
     return null;
   }

@@ -3,20 +3,20 @@ import React, { useRef, useCallback } from "react";
 import Ingridients from "./ingridients/ingridients";
 import { switchTabAction } from "../../services/burger-ingredients/actions";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
-import { TypedUseSelector, useTypedDispatch } from "../../hooks/hooks";
+import { useAppSelector, useTypedDispatch } from "../../hooks/hooks";
 import { IIngredientsState } from "../../services/burger-constructor/reducer";
 
 function BurgerIngridients() {
-  const ingredients = TypedUseSelector(
+  const ingredients = useAppSelector(
     (state) => state.ingredientsReducer.ingredients
   );
-  const selectedIngredient = TypedUseSelector(
+  const selectedIngredient = useAppSelector(
     (state) => state.ingredientsReducer.selectedIngredient
   );
-  const constructorIngredients = TypedUseSelector(
+  const constructorIngredients = useAppSelector(
     (state) => state.constructorIngredientsReducer.ingredients
   );
-  const constructorBun = TypedUseSelector(
+  const constructorBun = useAppSelector(
     (state) => state.constructorIngredientsReducer.bun
   );
   const buns = ingredients.filter((item) => item.type === "bun");
@@ -26,7 +26,7 @@ function BurgerIngridients() {
   const bunsRef = useRef<HTMLDivElement>(null);
   const saucesRef = useRef<HTMLDivElement>(null);
   const topingRef = useRef<HTMLDivElement>(null);
-  const currentTab = TypedUseSelector((state) => state.ingredientsReducer.tab);
+  const currentTab = useAppSelector((state) => state.ingredientsReducer.tab);
 
   const dispatch = useTypedDispatch();
 

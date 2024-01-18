@@ -2,7 +2,7 @@ import image from "../../../images/done.svg";
 import styles from "./order-details.module.css";
 
 interface IOrderDetails {
-  orderNumber: number | null;
+  orderNumber: string| null;
 }
 export default function OrderDetails({ orderNumber }: IOrderDetails) {
   return (

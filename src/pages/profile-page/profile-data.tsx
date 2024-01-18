@@ -7,11 +7,11 @@ import {
   Button,
   PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useTypedDispatch, TypedUseSelector } from "../../hooks/hooks";
+import { useTypedDispatch, useAppSelector } from "../../hooks/hooks";
 
 export default function ProfileData() {
   const dispatch = useTypedDispatch();
-  const userInfo = TypedUseSelector((state) => state.userLogicReducer.user);
+  const userInfo = useAppSelector((state) => state.userLogicReducer.user);
   
   const [name, setName] = useState(userInfo? userInfo.name : '');
   const [email, setEmail] = useState(userInfo? userInfo.email : '');

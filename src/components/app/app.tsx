@@ -21,9 +21,8 @@ import OrderInfo from "../modals/order-info/order-info";
 import OrdersCards from "../../pages/orders-page/orders-cards";
 import OrderInfoPage from "../modals/order-info/order-info-page";
 import { useTypedDispatch } from "../../hooks/hooks";
-export const ingredientsUrl =
-  "https://norma.nomoreparties.space/api/ingredients";
 export const baseUrl = "https://norma.nomoreparties.space";
+export const ingredientsUrl = `${baseUrl}/api/ingredients`;
 
 function App() {
   const dispatch = useTypedDispatch();

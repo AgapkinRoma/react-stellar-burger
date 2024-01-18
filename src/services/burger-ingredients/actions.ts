@@ -1,12 +1,10 @@
 import { ingredientsUrl } from "../../components/app/app";
-import { onResponse } from "../../utils/on-response";
 import { IIngredientsState } from "../burger-constructor/reducer";
 import * as ActionTypes from "./constants";
-import { store } from "../store";
 import { ThunkAction } from "redux-thunk";
-import { Dispatch } from "redux";
 import { RootState } from "../store";
 import { request } from "../../utils/request";
+import { AppThunk } from "../action-types/app-actions";
 //actions
 
 type TDataIngredients = {
@@ -65,12 +63,7 @@ export const switchTabAction = (tab: string) => ({
 ///thunk
 
 export const getIngredients =
-  (): ThunkAction<
-    Promise<void>,
-    RootState,
-    unknown,
-    TBurgetIngredientsActions
-  > =>
+  (): AppThunk<Promise<void>> =>
   (dispatch) => {
     dispatch(getIngredientsActionRequest());
     return request<TDataIngredients>(ingredientsUrl)

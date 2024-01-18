@@ -5,4 +5,4 @@ import { RootState } from "../services/store";
 
 import type {} from "redux-thunk/extend-redux";
 export const useTypedDispatch = () => useDispatch<MyDispatch>();
-export const TypedUseSelector: TypedUseSelectorHook<RootState> = useSelector;
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;

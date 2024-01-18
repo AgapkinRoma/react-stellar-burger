@@ -1,4 +1,3 @@
-import { IConstructorIngredients } from "../modals/order-details/actions";
 import { TBurgerConstructorActions } from "./actions";
 import * as ActionTypes from "./constants";
 

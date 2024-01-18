@@ -1,12 +1,11 @@
 import IngridientsAbout from "./ingridients-about";
 import styles from "./ingridietns-details.module.css";
 import { useLocation, useParams } from "react-router";
-import { useSelector } from "react-redux";
-import { TypedUseSelector } from "../../../hooks/hooks";
+import { useAppSelector } from "../../../hooks/hooks";
 export default function IngridientsDetails() {
   const { id } = useParams();
 
-  const ingredient = TypedUseSelector((state) =>
+  const ingredient = useAppSelector((state) =>
     state.ingredientsReducer.ingredients.find((item) => item._id === id)
   );
 

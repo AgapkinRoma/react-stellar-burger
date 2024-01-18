@@ -8,17 +8,16 @@ import styles from "./order-info.module.css";
 
 import { allIngredientsSelector } from "../../../services/selectors/selectors";
 import { useEffect, useMemo } from "react";
-import { useDispatch } from "react-redux";
 import { getOrderNumber } from "../../../services/modals/order-details/actions";
 import { IIngredientsState } from "../../../services/burger-constructor/reducer.js";
-import { TypedUseSelector, useTypedDispatch } from "../../../hooks/hooks";
+import { useAppSelector, useTypedDispatch } from "../../../hooks/hooks";
 
 export default function OrderInfo() {
   const dispatch = useTypedDispatch();
   const { number } = useParams();
  
-  const ingredinets =TypedUseSelector(allIngredientsSelector);
-  const order = TypedUseSelector((store) => {
+  const ingredinets =useAppSelector(allIngredientsSelector);
+  const order = useAppSelector((store) => {
     let order = store.allOrderReducer.data?.orders?.find(
       (order) => order.number == number
     );

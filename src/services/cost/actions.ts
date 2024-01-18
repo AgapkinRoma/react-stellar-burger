@@ -13,15 +13,13 @@ interface IResetCostAction {
   type: typeof ActionTypes.RESET;
 }
 
-export const addCostActionCreater =  (totalCost:number) => ({
-  type:ActionTypes.ADD,
-  payload:totalCost
-})
-export const resetCostActionCreater =  () => ({
-  type:ActionTypes.RESET,
-
-})
-
+export const addCostActionCreater = (totalCost: number) => ({
+  type: ActionTypes.ADD,
+  payload: totalCost,
+});
+export const resetCostActionCreater = () => ({
+  type: ActionTypes.RESET,
+});
 
 export type TCostActions =
   | IAddCostAction

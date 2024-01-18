@@ -2,8 +2,7 @@ import { baseUrl } from "../../../components/app/app";
 import { request } from "../../../utils/request";
 import * as ActionTypes from "./constants";
 import { IResetPasswordData } from "./reducer";
-import { RootState } from "../../store";
-import { ThunkAction } from "redux-thunk";
+import { AppThunk } from "../../action-types/app-actions";
 interface IResetPasswordActionRequest {
   type: typeof ActionTypes.RESET_PASSWORD_REQUEST;
 }
@@ -40,8 +39,8 @@ export const resetPasswordActionFailed = (error: string) => ({
 export const submitResetPassword = (
   password: string,
   token: string
-): ThunkAction<Promise<void>, RootState, unknown, TResetPasswordActions> => {
-  return function (dispatch) {
+): AppThunk<Promise<void>> => {
+  return  function (dispatch) {
     dispatch(resetPasswordActionRequest());
     return request<IResetPasswordData>(`${baseUrl}/api/password-reset/reset`, {
       method: "POST",

@@ -23,7 +23,7 @@ export const socketMiddleware = (
         wsConnect,
         wsDisconnect,
         wsConnecting,
-     
+
         onOpen,
         onClose,
         onError,

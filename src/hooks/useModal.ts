@@ -9,11 +9,11 @@ import {
   OPEN_MODAL_INGREDIENTS_DETAILS,
 } from "../services/modals/ingredients-details/constants";
 import { cleanIngredientsAction } from "../services/burger-constructor/actions";
-import { useTypedDispatch, TypedUseSelector } from "./hooks";
+import { useTypedDispatch, useAppSelector } from "./hooks";
 
 export const useModal = () => { 
   const dispatch = useTypedDispatch();
-  const orderDetailsModal = TypedUseSelector(
+  const orderDetailsModal = useAppSelector(
     (state) => state.orderDetailsModal.ordersModal
   );
   const openOrderModal = useCallback(() => {
@@ -25,7 +25,7 @@ export const useModal = () => {
     dispatch(cleanIngredientsAction());
   }, []);
 
-  const ingredientsDetailsModal = TypedUseSelector(
+  const ingredientsDetailsModal = useAppSelector(
     (state) => state.ingredientsDetailsModal.ingredientsModal
   );
 

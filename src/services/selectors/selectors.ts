@@ -14,9 +14,9 @@ export const allOrdersSelector = (state: RootState): IAllOrders[] | null =>
   state.allOrderReducer.data?.orders || null;
 export const userOrdersSelector = (state: RootState): IAllOrders[] | null =>
   state.userOrderReducer.data?.orders || null;
-export const orderNumberSelector = (state: RootState): number | null =>
+export const orderNumberSelector = (state: RootState): string | null =>
   state.orderDetailsModal.orderNumber;
-export const selectedOrderSelector = (state: RootState): IAllOrders|null =>
+export const selectedOrderSelector = (state: RootState): IAllOrders | null =>
   state.orderDetailsModal.selectedOrder;
 export const constructorIngredientsSelector = (
   state: RootState

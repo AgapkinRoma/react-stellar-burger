@@ -1,5 +1,4 @@
 import styles from "./ingridietns-about.module.css";
-import PropTypes from "prop-types";
 interface IIngredientsAbout{
   text:string;
   quantity:number

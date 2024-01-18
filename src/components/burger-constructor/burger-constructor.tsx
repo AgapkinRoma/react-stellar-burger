@@ -29,20 +29,20 @@ import {
   orderNumberSelector,
   userSelector,
 } from "../../services/selectors/selectors";
-import { useTypedDispatch, TypedUseSelector } from "../../hooks/hooks";
+import { useTypedDispatch, useAppSelector } from "../../hooks/hooks";
 import { IIngredientsState } from "../../services/burger-constructor/reducer";
 function BurgerConstructor() {
   const { orderDetailsModal, openOrderModal, closeOrderModal } = useModal();
   const dispatch = useTypedDispatch();
   const navigate = useNavigate();
-  const constructorIngredients = TypedUseSelector(
+  const constructorIngredients = useAppSelector(
     constructorIngredientsSelector
   );
   console.log("конструкторИнгредиенты", constructorIngredients);
-  const isLoading = TypedUseSelector(isLoadingSelector);
-  const costState = TypedUseSelector(costStateSelector);
-  const orderNumber = TypedUseSelector(orderNumberSelector);
-  const user = TypedUseSelector(userSelector);
+  const isLoading = useAppSelector(isLoadingSelector);
+  const costState = useAppSelector(costStateSelector);
+  const orderNumber = useAppSelector(orderNumberSelector);
+  const user = useAppSelector(userSelector);
   interface IUseDropProps {
     isOver: boolean;
   }

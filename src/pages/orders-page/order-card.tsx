@@ -4,21 +4,20 @@ import {
   FormattedDate,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link, useLocation, useParams } from "react-router-dom";
-import { v4 as uuidv4 } from "uuid";
 import { IIngredientsState } from "../../services/burger-constructor/reducer";
-import { IAllOrders } from "../../services/all-orders/reducer";
-interface IOrderCard{
-  orderInfo:{
-_id:string;
-updatedAt:string;
-status:string;
-number:string;
-name:string;
-ingredients:(IIngredientsState|undefined)[];
-createdAt:string;
-  }
+
+interface IOrderCard {
+  orderInfo: {
+    _id: string;
+    updatedAt: string;
+    status: string;
+    number: string;
+    name: string;
+    ingredients: (IIngredientsState | undefined)[];
+    createdAt: string;
+  };
 }
-export default function OrderCard( {orderInfo}:IOrderCard ) {
+export default function OrderCard({ orderInfo }: IOrderCard) {
   const { number, ingredients, name, status, createdAt } = orderInfo;
   const location = useLocation();
   const sliceIngredients = ingredients.slice(6).length;
@@ -27,8 +26,6 @@ export default function OrderCard( {orderInfo}:IOrderCard ) {
     (sum, ingredient) => sum + (ingredient?.price || 0),
     0
   );
-
-
 
   const url =
     location.pathname === `/feed`
@@ -59,7 +56,7 @@ export default function OrderCard( {orderInfo}:IOrderCard ) {
             {ingredients?.map((ingredient, index) => {
               if (index < 6) {
                 return (
-                  <div key={uuidv4()} className={styles.ingredient}>
+                  <div key={ingredient?._id} className={styles.ingredient}>
                     <img
                       className={styles.ingredientImg}
                       src={ingredient?.image_mobile}

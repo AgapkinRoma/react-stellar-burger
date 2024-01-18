@@ -6,21 +6,21 @@ import { connect } from "../../services/all-orders/actions";
 import { useMatch } from "react-router";
 import { disconnect } from "../../services/user-orders/actions";
 import { allOrdersSelector } from "../../services/selectors/selectors";
-import { useTypedDispatch, TypedUseSelector } from "../../hooks/hooks";
+import { useTypedDispatch, useAppSelector } from "../../hooks/hooks";
 interface IOrderCardProps {
   header: string;
 }
 export default function OrdersCards({ header }: IOrderCardProps) {
   const dispatch = useTypedDispatch();
   const ALL_ORDERS_URL = "wss://norma.nomoreparties.space/orders/all";
-  const orders = TypedUseSelector(allOrdersSelector);
-  const data = TypedUseSelector((state) => state.allOrderReducer.data);
-  const error = TypedUseSelector((state) => state.allOrderReducer.error);
+  const orders = useAppSelector(allOrdersSelector);
+  const data = useAppSelector((state) => state.allOrderReducer.data);
+  const error = useAppSelector((state) => state.allOrderReducer.error);
   console.log("data", data);
   console.log("ошибка ", error);
 
   const isProfile = useMatch("/profile/orders/");
-  const ingredients = TypedUseSelector(
+  const ingredients = useAppSelector(
     (state) => state.ingredientsReducer.ingredients
   );
   const findIngredientById = (id: string) => {

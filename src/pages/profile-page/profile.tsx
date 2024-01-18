@@ -3,7 +3,7 @@ import styles from "./profile.module.css";
 import { NavLink, Outlet, useLocation } from "react-router-dom";
 import { getUser, submitLogoutt } from "../../services/pages/user/action";
 import { setActive } from "../../utils/set-active/set-active";
-import {useTypedDispatch } from "../../hooks/hooks";
+import { useTypedDispatch } from "../../hooks/hooks";
 export default function ProfilePage() {
   const dispatch = useTypedDispatch();
   const location = useLocation();

@@ -3,27 +3,25 @@ import { TAllOrdersActions } from "./actions";
 
 export type TAllOrdersState = {
   status: "OFFLINE" | "CONNECTING" | "ONLINE";
-  data:IAllOrdersData|null;
-  error:string|null ;
+  data: IAllOrdersData | null;
+  error: string | null;
 };
 
-
-export interface IAllOrders{
-_id:string;
-updatedAt:string;
-status:string;
-number:string;
-name:string;
-ingredients:string[];
-createdAt:string;
+export interface IAllOrders {
+  _id: string;
+  updatedAt: string;
+  status: string;
+  number: string;
+  name: string;
+  ingredients: string[];
+  createdAt: string;
 }
 
-export interface IAllOrdersData  {
-  orders:IAllOrders[];
-  success:boolean;
-  total:number;
-  totalToday:number;
-
+export interface IAllOrdersData {
+  orders: IAllOrders[];
+  success: boolean;
+  total: number;
+  totalToday: number;
 }
 
 const initialState: TAllOrdersState = {

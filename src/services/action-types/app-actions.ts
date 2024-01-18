@@ -10,9 +10,6 @@ import { TResetPasswordActions } from "../pages/reset-password/action";
 import { TUserActions } from "../pages/user/action";
 import { TUserOrdersActions } from "../user-orders/actions";
 import { RootState } from "../store";
-import { IUserData } from "../pages/user/reducer";
-import { Action } from "redux";
-import { ThunkDispatch } from "redux-thunk/src";
 export type AppActions =
   | TAllOrdersActions
   | TBurgerConstructorActions

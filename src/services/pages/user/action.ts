@@ -3,9 +3,6 @@ import { baseUrl } from "../../../components/app/app";
 import { request } from "../../../utils/request";
 import * as ActionTypes from "./constants";
 import { IUserData } from "./reducer";
-import { RootState } from "../../store";
-import { ThunkAction } from "redux-thunk";
-import { Dispatch } from "react";
 import { AppActions, AppThunk } from "../../action-types/app-actions";
 interface ISetUserAction {
   type: typeof ActionTypes.SET_USER;
@@ -36,7 +33,7 @@ export const submitRegistration = (
   email: string,
   password: string,
   name: string
-): ThunkAction<Promise<void>, RootState, unknown, TUserActions> => {
+): AppThunk<Promise<void>> => {
   return function (dispatch) {
     return request<IMyData>(`${baseUrl}/api/auth/register`, {
       method: "POST",
@@ -58,7 +55,7 @@ export const submitRegistration = (
 export const submitLogin = (
   email: string,
   password: string
-): ThunkAction<Promise<void>, RootState, unknown, TUserActions> => {
+): AppThunk<Promise<void>> => {
   return function (dispatch) {
     return request<IMyData>(`${baseUrl}/api/auth/login`, {
       method: "POST",
@@ -77,12 +74,7 @@ export const submitLogin = (
   };
 };
 
-export const submitLogoutt = (): ThunkAction<
-  Promise<void>,
-  RootState,
-  unknown,
-  TUserActions
-> => {
+export const submitLogoutt = (): AppThunk<Promise<void>> => {
   return function (dispatch) {
     return request(`${baseUrl}/api/auth/logout`, {
       method: "POST",
@@ -103,12 +95,7 @@ export const submitLogoutt = (): ThunkAction<
   };
 };
 
-export const getUser = (): ThunkAction<
-  Promise<void>,
-  RootState,
-  unknown,
-  TUserActions
-> => {
+export const getUser = (): AppThunk<Promise<void>> => {
   return async function (dispatch) {
     try {
       const data = await fetchWithRefresh(`${baseUrl}/api/auth/user`, {
@@ -130,7 +117,7 @@ export const getUser = (): ThunkAction<
 export const changeUserInfo = (
   name: string,
   email: string
-): ThunkAction<Promise<void>, RootState, unknown, TUserActions> => {
+): AppThunk<Promise<void>> => {
   return async function (dispatch) {
     try {
       const data = await fetchWithRefresh(`${baseUrl}/api/auth/user`, {
