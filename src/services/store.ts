@@ -22,7 +22,6 @@ import {
   USER_ORDERS_WS_OPEN,
 } from "./user-orders/constants";
 
-
 const liveOrdersMiddleWare = socketMiddleware({
   wsConnect: ALL_ORDERS_CONNECT,
   wsDisconnect: ALL_ORDERS_DISCONNECT,

@@ -56,7 +56,10 @@ export default function OrderCard({ orderInfo }: IOrderCard) {
             {ingredients?.map((ingredient, index) => {
               if (index < 6) {
                 return (
-                  <div key={ingredient?._id} className={styles.ingredient}>
+                  <div
+                    key={`${ingredient?._id}${index}`}
+                    className={styles.ingredient}
+                  >
                     <img
                       className={styles.ingredientImg}
                       src={ingredient?.image_mobile}

@@ -79,7 +79,7 @@ const setOrderNumberRequest = () => ({
 
 const setOrderNumberFailed = (error: string) => ({
   type: ActionTypes.SUBMIT_ORDER_NUMBER_FAILED,
-   payload:error,
+  payload: error,
 });
 export const setOrderNumber = (orderNumber: string) => {
   return {
@@ -102,7 +102,7 @@ export const submitOrder = (
     const ingredId = constructorIngredients.ingredients.map((item) => item._id);
     const bunId = constructorIngredients.bun?._id;
     const ingredientsId = [bunId, ...ingredId, bunId];
-   request<IAllOrdersData>(`${baseUrl}/api/orders`, {
+    request<IAllOrdersData>(`${baseUrl}/api/orders`, {
       method: "POST",
       headers: {
         "Content-type": "application/json",
@@ -115,7 +115,7 @@ export const submitOrder = (
       .then((data) => {
         dispatch(setOrderNumber(data.orders[0].number));
       })
-      .catch((error:string) => {
+      .catch((error: string) => {
         console.log(`Упс ошибка - ${error}`);
         dispatch(setOrderNumberFailed(error));
       });
